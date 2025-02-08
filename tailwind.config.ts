@@ -9,12 +9,12 @@ export default {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
       },
       animation: {
-        turn: "turn 2s ease-in-out 1",
+        wiggle: "wiggle 1s linear infinite",
       },
       keyframes: {
-        turn: {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
         },
       },
     },

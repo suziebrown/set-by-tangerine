@@ -15,7 +15,7 @@ export default function Header() {
                 <LogoBlock letter="E" />
             </div>
 
-            <i className="ml-4 mt-auto mb-1">Set by Tangerine</i>
+            <i className="ml-4 mt-auto mb-1 text-orange-500">Set by Tangerine</i>
         </div>
     );
 }

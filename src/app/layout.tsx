@@ -8,7 +8,7 @@ import Header from "./layout/header";
 
 export const metadata: Metadata = {
   title: "Set by Tangerine",
-  description: "Puzzles and games by Tangerine",
+  description: "Crosswords and other puzzles by Tangerine",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
