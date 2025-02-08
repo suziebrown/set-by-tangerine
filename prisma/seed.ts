@@ -1,25 +1,42 @@
 import { PrismaClient } from "@prisma/client";
 
+import insidersCrosswordData from "./crossword-data/insiders.json";
+
 const prisma = new PrismaClient();
 
 async function main() {
-  const testPuzzle = await prisma.puzzle.upsert({
+  const insidersCrossword = await prisma.puzzle.upsert({
     where: { id: 1000 },
     update: {},
     create: {
-      title: "Test Puzzle",
+      title: "Insiders",
       setBy: "Tangerine",
       blurb:
-        "This is just a test puzzle to check the database is working as expected, so there's really not much to say about it.",
-      publishedAt: new Date(),
+        "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29 and 30 Janurary 2025. It alludes to some of the peaceful climate protesters being held in prison in the UK at the time.",
+      publishedAt: new Date(2025, 2, 8, 18, 0, 0),
       firstPublishedAt: new Date(2025, 2, 8, 12, 0, 0),
-      downloadUrl: "https://www.example.com/testpuzzle.pdf",
-      thumbnailUrl: "https://www.example.com/testpuzzle.jpg",
+      downloadUrl: null,
+      thumbnailUrl: null,
       tags: {
-        create: [{ label: "crossword" }, { label: "birthday" }],
+        create: [{ label: "crossword" }],
+      },
+      crossword: {
+        create: { instructions: insidersCrosswordData.instructions },
       },
     },
   });
+
+  await Promise.all(
+    insidersCrosswordData.clues.map(async clue => {
+      const response = await prisma.clue.create({
+         data: {
+          ...clue,
+          crosswordId: insidersCrossword.id,
+         }}
+      );
+      return response;
+    })
+  );
 }
 
 main()

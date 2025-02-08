@@ -2,9 +2,7 @@ import { PuzzlePreview } from "~/app/_components/puzzle-preview";
 import { api } from "~/trpc/server";
 
 export default async function Browse() {
-  const puzzles = await api.puzzle.getAll();
-
-  void api.post.getLatest.prefetch();
+  const puzzles = await api.puzzle.list();
 
   return (
     <>
