@@ -1,5 +1,5 @@
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
     previewFeatures = ["strictUndefinedChecks"]
 }
 
@@ -18,30 +18,30 @@ model Post {
 }
 
 model Puzzle {
-    id Int      @id @default(autoincrement())
-    title String
-    setBy String
-    blurb String
-    publishedAt DateTime
+    id               Int              @id @default(autoincrement())
+    title            String
+    setBy            String
+    blurb            String
+    publishedAt      DateTime
     firstPublishedAt DateTime?
-    downloadUrl String?
-    thumbnailUrl String?
-    tags Tag[]
-    crosswordPuzzle CrosswordPuzzle?
+    downloadUrl      String?
+    thumbnailUrl     String?
+    tags             Tag[]
+    crosswordPuzzle  CrosswordPuzzle?
 
     @@index([title])
 }
 
 model Tag {
-    id Int      @id @default(autoincrement())
-    label String
+    id      Int      @id @default(autoincrement())
+    label   String
     puzzles Puzzle[]
 
     @@index([label])
 }
 
 model CrosswordPuzzle {
-    id Int      @id @default(autoincrement())
-    puzzleId Int @unique
-    puzzle Puzzle @relation(fields: [puzzleId], references: [id])
+    id       Int    @id @default(autoincrement())
+    puzzleId Int    @unique
+    puzzle   Puzzle @relation(fields: [puzzleId], references: [id])
 }
