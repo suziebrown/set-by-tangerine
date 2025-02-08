@@ -14,7 +14,9 @@ export default async function ViewPuzzle({
   return (
     <>
       <Title>{puzzleDetails.title}</Title>
-      <p>{puzzleDetails.blurb}</p>
+      <p className="text-pretty rounded-lg border border-white/30 bg-white/20 py-2 px-4">
+        {puzzleDetails.blurb}
+      </p>
 
       {puzzleDetails?.crossword && (
         <Crossword crossword={puzzleDetails.crossword} />

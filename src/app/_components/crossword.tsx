@@ -3,23 +3,55 @@ import { CrosswordWithClues } from "prisma/types";
 export default function Crossword(props: { crossword: CrosswordWithClues }) {
   return (
     <>
-      <h2>Across</h2>
-      <ul>
-        {props.crossword.clues.map((clue) => (
-          <li key={clue.id}>
-            <strong>{clue.numberLabel}</strong> {clue.clue} ({clue.lengthLabel})
-          </li>
-        ))}
-      </ul>
+      <p className="text-pretty">{props.crossword.instructions}</p>
 
-      <h2>Down</h2>
-      <ul>
-        {props.crossword.clues.map((clue) => (
-          <li key={clue.id}>
-            <strong>{clue.numberLabel}</strong> {clue.clue}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <h2 className="mb-2 font-bold">Across</h2>
+        <table>
+          <tbody>
+            {props.crossword.clues
+              .filter((c) => c.direction === "across")
+              .sort((a, b) => Number(a.numberLabel) - Number(b.numberLabel))
+              .map((clue) => (
+                <tr key={clue.id}>
+                  <td className="min-w-16 align-baseline font-semibold">
+                    {clue.numberLabel}.
+                  </td>
+                  <td>
+                    <span
+                      dangerouslySetInnerHTML={{ __html: clue.clue }}
+                    ></span>{" "}
+                    ({clue.lengthLabel})
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <h2 className="mb-2 font-bold">Down</h2>
+        <table>
+          <tbody>
+            {props.crossword.clues
+              .filter((c) => c.direction === "down")
+              .sort((a, b) => Number(a.numberLabel) - Number(b.numberLabel))
+              .map((clue) => (
+                <tr key={clue.id}>
+                  <td className="min-w-16 align-baseline font-semibold">
+                    {clue.numberLabel}.
+                  </td>
+                  <td>
+                    <span
+                      dangerouslySetInnerHTML={{ __html: clue.clue }}
+                    ></span>{" "}
+                    ({clue.lengthLabel})
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
