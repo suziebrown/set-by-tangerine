@@ -1,5 +1,7 @@
+import { Puzzle } from "@prisma/client";
 import Crossword from "~/app/_components/crossword";
 import { api } from "~/trpc/server";
+import Title from "../../_components/title";
 
 export default async function ViewPuzzle({
   params,
@@ -11,10 +13,12 @@ export default async function ViewPuzzle({
 
   return (
     <>
-      <div>Puzzle ID: {id}</div>
-      <div>Tags: {puzzleDetails.tags[0]?.label}</div>
+      <Title>{puzzleDetails.title}</Title>
+      <p>{puzzleDetails.blurb}</p>
 
-      {/* {puzzleDetails?.crosswordPuzzle && <Crossword puzzle={puzzleDetails} />} */}
+      {puzzleDetails?.crossword && (
+        <Crossword crossword={puzzleDetails.crossword} />
+      )}
     </>
   );
 }

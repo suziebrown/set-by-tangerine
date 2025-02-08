@@ -1,7 +1,25 @@
-import { Puzzle } from "@prisma/client";
+import { CrosswordWithClues } from "prisma/types";
 
-export default function Crossword(props: { puzzle: Puzzle }) {
+export default function Crossword(props: { crossword: CrosswordWithClues }) {
   return (
-    <h1>{props.puzzle.id}</h1>
+    <>
+      <h2>Across</h2>
+      <ul>
+        {props.crossword.clues.map((clue) => (
+          <li key={clue.id}>
+            <strong>{clue.numberLabel}</strong> {clue.clue} ({clue.lengthLabel})
+          </li>
+        ))}
+      </ul>
+
+      <h2>Down</h2>
+      <ul>
+        {props.crossword.clues.map((clue) => (
+          <li key={clue.id}>
+            <strong>{clue.numberLabel}</strong> {clue.clue}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
