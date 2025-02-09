@@ -4,11 +4,20 @@ import insidersCrosswordData from "./crossword-data/insiders.json";
 
 const prisma = new PrismaClient();
 
-async function main() {
-  const insidersCrossword = await prisma.puzzle.upsert({
-    where: { id: 1000 },
-    update: {},
-    create: {
+async function clearDatabase(): Promise<void> {
+  console.log("Dropping static data from database...");
+
+  await prisma.clue.deleteMany();
+  await prisma.crossword.deleteMany();
+  await prisma.tag.deleteMany();
+  await prisma.puzzle.deleteMany();
+}
+
+async function seedData(): Promise<void> {
+  console.log("Seeding static data into database...");
+
+  const insidersPuzzle = await prisma.puzzle.create({
+    data: {
       title: "Insiders",
       setBy: "Tangerine",
       blurb:
@@ -24,22 +33,29 @@ async function main() {
         create: { instructions: insidersCrosswordData.instructions },
       },
     },
+    include: { crossword: true },
   });
 
+  console.log(
+    "Seeded Insiders crossword with ID",
+    insidersPuzzle.crossword?.id,
+  );
+
   await Promise.all(
-    insidersCrosswordData.clues.map(async clue => {
+    insidersCrosswordData.clues.map(async (clue) => {
       const response = await prisma.clue.create({
-         data: {
+        data: {
           ...clue,
-          crosswordId: insidersCrossword.id,
-         }}
-      );
+          crossword: { connect: { id: insidersPuzzle.crossword?.id } },
+        },
+      });
       return response;
-    })
+    }),
   );
 }
 
-main()
+clearDatabase()
+  .then(seedData)
   .then(async () => {
     await prisma.$disconnect();
   })

@@ -1,4 +1,4 @@
-import { CrosswordWithClues } from "prisma/types";
+import { type CrosswordWithClues } from "prisma/types";
 
 export default function Crossword(props: { crossword: CrosswordWithClues }) {
   return (

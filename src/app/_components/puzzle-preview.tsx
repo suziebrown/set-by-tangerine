@@ -1,6 +1,6 @@
 "use client";
 
-import { Puzzle } from "@prisma/client";
+import { type Puzzle } from "@prisma/client";
 
 export function PuzzlePreview(props: { puzzle: Puzzle }) {
   return (
