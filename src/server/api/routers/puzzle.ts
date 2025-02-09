@@ -15,7 +15,7 @@ export const puzzleRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const puzzle = await ctx.db.puzzle.findUniqueOrThrow({
         where: { id: input.id },
-        include: { tags: true, crossword: { include: {clues: true }} },
+        include: { tags: true, crossword: { include: { clues: true } } },
       });
 
       return puzzle ?? null;

@@ -27,15 +27,15 @@ async function main() {
   });
 
   await Promise.all(
-    insidersCrosswordData.clues.map(async clue => {
+    insidersCrosswordData.clues.map(async (clue) => {
       const response = await prisma.clue.create({
-         data: {
+        data: {
           ...clue,
           crosswordId: insidersCrossword.id,
-         }}
-      );
+        },
+      });
       return response;
-    })
+    }),
   );
 }
 
