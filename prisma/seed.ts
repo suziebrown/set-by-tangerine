@@ -25,7 +25,8 @@ async function seedData(): Promise<void> {
       publishedAt: new Date(2025, 2, 8, 18, 0, 0),
       firstPublishedAt: new Date(2025, 2, 8, 12, 0, 0),
       downloadUrl: null,
-      thumbnailUrl: null,
+      imageUrl:
+        "https://rndqtmfeb1wv7943.public.blob.vercel-storage.com/images/insiders_grid.jpg",
       tags: {
         create: [{ label: "crossword" }],
       },
@@ -36,17 +37,12 @@ async function seedData(): Promise<void> {
     include: { crossword: true },
   });
 
-  console.log(
-    "Seeded Insiders crossword with ID",
-    insidersPuzzle.crossword?.id,
-  );
-
   await Promise.all(
     insidersCrosswordData.clues.map(async (clue) => {
       const response = await prisma.clue.create({
         data: {
           ...clue,
-          crossword: { connect: { id: insidersPuzzle.crossword?.id } },
+          crossword: { connect: { id: insidersPuzzle.crossword!.id } },
         },
       });
       return response;
