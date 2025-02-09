@@ -35,6 +35,8 @@ async function seedData(): Promise<void> {
     },
   });
 
+  console.log("Seeded Insiders crossword with ID", insidersCrossword.id);
+
   await Promise.all(
     insidersCrosswordData.clues.map(async (clue) => {
       const response = await prisma.clue.create({
