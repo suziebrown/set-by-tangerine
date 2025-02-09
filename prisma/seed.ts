@@ -7,8 +7,8 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.clue.deleteMany();
   await prisma.crossword.deleteMany();
-  await prisma.puzzle.deleteMany();
   await prisma.tag.deleteMany();
+  await prisma.puzzle.deleteMany();
 
   const insidersCrossword = await prisma.puzzle.create({
     data: {
