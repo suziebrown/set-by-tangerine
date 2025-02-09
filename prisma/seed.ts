@@ -33,6 +33,7 @@ async function seedData(): Promise<void> {
         create: { instructions: insidersCrosswordData.instructions },
       },
     },
+    include: { crossword: true },
   });
 
   console.log("Seeded Insiders crossword with ID", insidersCrossword.id);
