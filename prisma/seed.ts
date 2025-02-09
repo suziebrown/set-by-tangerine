@@ -4,14 +4,16 @@ import insidersCrosswordData from "./crossword-data/insiders.json";
 
 const prisma = new PrismaClient();
 
-async function main() {
+async function clearDatabase(): Promise<void> {
   console.log("Dropping static data from database...");
 
   await prisma.clue.deleteMany();
   await prisma.crossword.deleteMany();
   await prisma.tag.deleteMany();
   await prisma.puzzle.deleteMany();
+}
 
+async function seedData(): Promise<void> {
   console.log("Seeding static data into database...");
 
   const insidersCrossword = await prisma.puzzle.create({
@@ -38,7 +40,7 @@ async function main() {
       const response = await prisma.clue.create({
         data: {
           ...clue,
-          crosswordId: insidersCrossword.id,
+          crossword: { connect: insidersCrossword },
         },
       });
       return response;
@@ -46,7 +48,8 @@ async function main() {
   );
 }
 
-main()
+clearDatabase()
+  .then(seedData)
   .then(async () => {
     await prisma.$disconnect();
   })
