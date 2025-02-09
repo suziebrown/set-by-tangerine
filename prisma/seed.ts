@@ -16,7 +16,7 @@ async function clearDatabase(): Promise<void> {
 async function seedData(): Promise<void> {
   console.log("Seeding static data into database...");
 
-  const insidersCrossword = await prisma.puzzle.create({
+  const insidersPuzzle = await prisma.puzzle.create({
     data: {
       title: "Insiders",
       setBy: "Tangerine",
@@ -36,14 +36,17 @@ async function seedData(): Promise<void> {
     include: { crossword: true },
   });
 
-  console.log("Seeded Insiders crossword with ID", insidersCrossword.id);
+  console.log(
+    "Seeded Insiders crossword with ID",
+    insidersPuzzle.crossword?.id,
+  );
 
   await Promise.all(
     insidersCrosswordData.clues.map(async (clue) => {
       const response = await prisma.clue.create({
         data: {
           ...clue,
-          crossword: { connect: { id: insidersCrossword.id } },
+          crossword: { connect: { id: insidersPuzzle.crossword?.id } },
         },
       });
       return response;
