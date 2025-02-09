@@ -1,6 +1,5 @@
-import { CrosswordWithClues } from "prisma/types";
+import { type CrosswordWithClues  } from "prisma/types";
 
-import { Puzzle } from "@prisma/client";
 export default function Crossword(props: { crossword: CrosswordWithClues }) {
   return (
     <>
