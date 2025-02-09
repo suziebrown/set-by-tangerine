@@ -5,10 +5,13 @@ import insidersCrosswordData from "./crossword-data/insiders.json";
 const prisma = new PrismaClient();
 
 async function main() {
-  const insidersCrossword = await prisma.puzzle.upsert({
-    where: { id: 1000 },
-    update: {},
-    create: {
+  await prisma.clue.deleteMany();
+  await prisma.crossword.deleteMany();
+  await prisma.puzzle.deleteMany();
+  await prisma.tag.deleteMany();
+
+  const insidersCrossword = await prisma.puzzle.create({
+    data: {
       title: "Insiders",
       setBy: "Tangerine",
       blurb:
