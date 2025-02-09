@@ -40,7 +40,7 @@ async function seedData(): Promise<void> {
       const response = await prisma.clue.create({
         data: {
           ...clue,
-          crossword: { connect: insidersCrossword },
+          crossword: { connect: { id: insidersCrossword.id } },
         },
       });
       return response;
