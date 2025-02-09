@@ -34,7 +34,7 @@ model Puzzle {
 
 model Tag {
     id      Int      @id @default(autoincrement())
-    label   String
+    label   String @unique
     puzzles Puzzle[]
 
     @@index([label])

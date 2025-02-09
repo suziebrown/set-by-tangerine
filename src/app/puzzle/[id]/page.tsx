@@ -1,4 +1,3 @@
-import { Puzzle } from "@prisma/client";
 import Crossword from "~/app/_components/crossword";
 import { api } from "~/trpc/server";
 import Title from "../../_components/title";
