@@ -1,14 +1,13 @@
 import { PuzzlePreview } from "~/app/_components/puzzle-preview";
 import { api } from "~/trpc/server";
+import Title from "../_components/title";
 
 export default async function Browse() {
-  const puzzles = await api.puzzle.getAll();
-
-  void api.post.getLatest.prefetch();
+  const puzzles = await api.puzzle.list();
 
   return (
     <>
-      <h1 className="text-2xl font-bold tracking-tight">Browse puzzles</h1>
+      <Title>Browse puzzles</Title>
 
       <div className="flex w-full flex-wrap justify-center">
         {puzzles.map((p) => (

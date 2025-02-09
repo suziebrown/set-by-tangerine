@@ -27,7 +27,7 @@ model Puzzle {
     downloadUrl      String?
     thumbnailUrl     String?
     tags             Tag[]
-    crosswordPuzzle  CrosswordPuzzle?
+    crossword  Crossword?
 
     @@index([title])
 }
@@ -40,8 +40,20 @@ model Tag {
     @@index([label])
 }
 
-model CrosswordPuzzle {
-    id       Int    @id @default(autoincrement())
-    puzzleId Int    @unique
-    puzzle   Puzzle @relation(fields: [puzzleId], references: [id])
+model Crossword {
+    id           Int             @id @default(autoincrement())
+    puzzleId     Int @unique
+    puzzle       Puzzle          @relation(fields: [puzzleId], references: [id])
+    instructions String
+    clues        Clue[]
+}
+
+model Clue {
+    id                Int             @id @default(autoincrement())
+    crosswordId Int             
+    crossword  Crossword @relation(fields: [crosswordId], references: [id])
+    direction         String
+    numberLabel       String
+    clue              String
+    lengthLabel       String
 }
