@@ -6,12 +6,14 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log("Dropping static data from database...");
+
   await prisma.clue.deleteMany();
   await prisma.crossword.deleteMany();
   await prisma.tag.deleteMany();
   await prisma.puzzle.deleteMany();
 
   console.log("Seeding static data into database...");
+
   const insidersCrossword = await prisma.puzzle.create({
     data: {
       title: "Insiders",
