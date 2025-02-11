@@ -22,10 +22,10 @@ async function seedData(): Promise<void> {
       setBy: "Tangerine",
       blurb:
         "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29 and 30 Janurary 2025. It alludes to some of the peaceful climate protesters being held in prison in the UK at the time.",
-      publishedAt: new Date(2025, 2, 8, 18, 0, 0),
-      firstPublishedAt: new Date(2025, 2, 8, 12, 0, 0),
+      publishedAt: new Date(2025, 1, 8, 18, 0, 0),
+      firstPublishedAt: new Date(2025, 0, 13, 10, 0, 0),
       downloadUrl: null,
-      thumbnailUrl: null,
+      imageUrl: "insiders_grid.jpg",
       tags: {
         create: [{ label: "crossword" }],
       },
@@ -36,17 +36,12 @@ async function seedData(): Promise<void> {
     include: { crossword: true },
   });
 
-  console.log(
-    "Seeded Insiders crossword with ID",
-    insidersPuzzle.crossword?.id,
-  );
-
   await Promise.all(
     insidersCrosswordData.clues.map(async (clue) => {
       const response = await prisma.clue.create({
         data: {
           ...clue,
-          crossword: { connect: { id: insidersPuzzle.crossword?.id } },
+          crossword: { connect: { id: insidersPuzzle.crossword!.id } },
         },
       });
       return response;

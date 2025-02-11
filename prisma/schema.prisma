@@ -25,7 +25,7 @@ model Puzzle {
     publishedAt      DateTime
     firstPublishedAt DateTime?
     downloadUrl      String?
-    thumbnailUrl     String?
+    imageUrl         String?
     tags             Tag[]
     crossword        Crossword?
 

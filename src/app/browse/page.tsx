@@ -9,7 +9,7 @@ export default async function Browse() {
     <>
       <Title>Browse puzzles</Title>
 
-      <div className="flex w-full flex-wrap justify-center">
+      <div className="flex w-full flex-wrap justify-start">
         {puzzles.map((p) => (
           <PuzzlePreview puzzle={p} key={p.id} />
         ))}

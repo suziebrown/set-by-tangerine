@@ -1,11 +1,28 @@
-"use client";
+import { type PuzzleWithTags } from "prisma/types";
+import { Badge } from "./badge";
+import { PreviewImage } from "./preview-image";
 
-import { type Puzzle } from "@prisma/client";
-
-export function PuzzlePreview(props: { puzzle: Puzzle }) {
+export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
   return (
-    <div className="flex-grow rounded-lg border border-white/30 bg-white/20 p-2">
-      {props.puzzle.title}
-    </div>
+    <a
+      href={`/puzzle/${props.puzzle.id}`}
+      className="max-w-[400px] flex-grow rounded-lg border border-white/30 bg-white/20 p-2"
+    >
+      <h3 className="text-lg font-semibold">{props.puzzle.title}</h3>
+
+      <span className="text-sm">
+        First published on {props.puzzle.firstPublishedAt?.toLocaleDateString()}
+      </span>
+
+      <ul className="mt-2">
+        {props.puzzle.tags.map((tag) => (
+          <li key={tag.id}>
+            <Badge label={tag.label} />
+          </li>
+        ))}
+      </ul>
+
+      <PreviewImage src={props.puzzle.imageUrl} alt={props.puzzle.title} />
+    </a>
   );
 }
