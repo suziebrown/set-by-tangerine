@@ -1,5 +1,6 @@
 import { type PuzzleWithTags } from "prisma/types";
 import { Badge } from "./badge";
+import { PreviewImage } from "./preview-image";
 
 export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
   return (
@@ -21,13 +22,7 @@ export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
         ))}
       </ul>
 
-      <div className="mt-4 h-[150px] w-full overflow-hidden rounded">
-        <img
-          src={props.puzzle.imageUrl ?? undefined}
-          alt={`Preview of ${props.puzzle.title}`}
-          className="scale-125"
-        />
-      </div>
+      <PreviewImage src={props.puzzle.imageUrl} alt={props.puzzle.title} />
     </a>
   );
 }

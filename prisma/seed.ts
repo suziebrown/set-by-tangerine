@@ -25,8 +25,7 @@ async function seedData(): Promise<void> {
       publishedAt: new Date(2025, 1, 8, 18, 0, 0),
       firstPublishedAt: new Date(2025, 0, 13, 10, 0, 0),
       downloadUrl: null,
-      imageUrl:
-        "https://rndqtmfeb1wv7943.public.blob.vercel-storage.com/images/insiders_grid.jpg",
+      imageUrl: "insiders_grid.jpg",
       tags: {
         create: [{ label: "crossword" }],
       },
