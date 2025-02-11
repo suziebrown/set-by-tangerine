@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .clip-preview {
+    clip-path: inset(0 10% 10% 0);
+    object-fit: cover;
+  }
+}

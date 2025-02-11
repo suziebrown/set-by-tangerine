@@ -22,8 +22,8 @@ async function seedData(): Promise<void> {
       setBy: "Tangerine",
       blurb:
         "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29 and 30 Janurary 2025. It alludes to some of the peaceful climate protesters being held in prison in the UK at the time.",
-      publishedAt: new Date(2025, 2, 8, 18, 0, 0),
-      firstPublishedAt: new Date(2025, 2, 8, 12, 0, 0),
+      publishedAt: new Date(2025, 1, 8, 18, 0, 0),
+      firstPublishedAt: new Date(2025, 0, 13, 10, 0, 0),
       downloadUrl: null,
       imageUrl:
         "https://rndqtmfeb1wv7943.public.blob.vercel-storage.com/images/insiders_grid.jpg",
