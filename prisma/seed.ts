@@ -21,10 +21,10 @@ async function seedData(): Promise<void> {
       title: "Insiders",
       setBy: "Tangerine",
       blurb:
-        "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29 and 30 Janurary 2025. It alludes to some of the peaceful climate protesters being held in prison in the UK at the time.",
+        "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29-30 Janurary 2025, where 16 peaceful climate protestors were appealing their long prison sentences. The completed puzzle alludes to some of these and other climate activists imprisoned in the UK at the time of publication.",
       publishedAt: new Date(2025, 1, 8, 18, 0, 0),
       firstPublishedAt: new Date(2025, 0, 13, 10, 0, 0),
-      downloadUrl: null,
+      downloadUrl: "insiders-crossword.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
         create: [{ label: "crossword" }],
