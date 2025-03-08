@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import insidersCrosswordData from "./crossword-data/insiders.json";
+import helloMyNameIsCrosswordData from "./crossword-data/hello-my-name-is.json";
 
 const prisma = new PrismaClient();
 
@@ -24,7 +25,7 @@ async function seedData(): Promise<void> {
         "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29-30 Janurary 2025, where 16 peaceful climate protestors were appealing their long prison sentences. The completed puzzle alludes to some of these and other climate activists imprisoned in the UK at the time of publication.",
       publishedAt: new Date(2025, 1, 8, 18, 0, 0),
       firstPublishedAt: new Date(2025, 0, 13, 10, 0, 0),
-      downloadUrl: "insiders-crossword.pdf",
+      downloadUrl: "insiders.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
         create: [{ label: "crossword" }],
@@ -42,6 +43,37 @@ async function seedData(): Promise<void> {
         data: {
           ...clue,
           crossword: { connect: { id: insidersPuzzle.crossword!.id } },
+        },
+      });
+      return response;
+    }),
+  );
+
+  const helloMyNameIsPuzzle = await prisma.puzzle.create({
+    data: {
+      title: "Hello My Name Is",
+      setBy: "Tangerine",
+      blurb: "Allow me to introduce myself...",
+      publishedAt: new Date(2025, 1, 16, 14, 0, 0),
+      firstPublishedAt: new Date(2025, 1, 16, 14, 0, 0),
+      downloadUrl: "hello-my-name-is.pdf",
+      imageUrl: "hello-my-name-is_grid.png",
+      tags: {
+        connect: [{ label: "crossword" }],
+      },
+      crossword: {
+        create: { instructions: helloMyNameIsCrosswordData.instructions },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await Promise.all(
+    helloMyNameIsCrosswordData.clues.map(async (clue) => {
+      const response = await prisma.clue.create({
+        data: {
+          ...clue,
+          crossword: { connect: { id: helloMyNameIsPuzzle.crossword!.id } },
         },
       });
       return response;
