@@ -25,7 +25,7 @@ async function seedData(): Promise<void> {
         "I created this themed crossword for the Free Political Prisoners action at the Royal Courts of Justice on 29-30 Janurary 2025, where 16 peaceful climate protestors were appealing their long prison sentences. The completed puzzle alludes to some of these and other climate activists imprisoned in the UK at the time of publication.",
       publishedAt: new Date(2025, 1, 8, 18, 0, 0),
       firstPublishedAt: new Date(2025, 0, 13, 10, 0, 0),
-      downloadUrl: "insiders-crossword.pdf",
+      downloadUrl: "insiders.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
         create: [{ label: "crossword" }],
@@ -53,11 +53,11 @@ async function seedData(): Promise<void> {
     data: {
       title: "Hello My Name Is",
       setBy: "Tangerine",
-      blurb: "",
+      blurb: "Allow me to introduce myself...",
       publishedAt: new Date(2025, 1, 16, 14, 0, 0),
       firstPublishedAt: new Date(2025, 1, 16, 14, 0, 0),
       downloadUrl: "hello-my-name-is.pdf",
-      imageUrl: "hello-my-name-is_grid.jpg",
+      imageUrl: "hello-my-name-is_grid.png",
       tags: {
         connect: [{ label: "crossword" }],
       },

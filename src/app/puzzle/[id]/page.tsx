@@ -22,9 +22,9 @@ export default async function ViewPuzzle({
       </div>
 
       {puzzleDetails.blurb && (
-      <p className="text-pretty rounded-lg border border-white/30 bg-white/20 px-4 py-2">
-        {puzzleDetails.blurb}
-      </p>
+        <p className="text-pretty rounded-lg border border-white/30 bg-white/20 px-4 py-2">
+          {puzzleDetails.blurb}
+        </p>
       )}
 
       {puzzleDetails?.crossword && (
