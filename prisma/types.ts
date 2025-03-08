@@ -13,3 +13,11 @@ const crosswordWithClues = Prisma.validator<Prisma.CrosswordDefaultArgs>()({
 export type CrosswordWithClues = Prisma.CrosswordGetPayload<
   typeof crosswordWithClues
 >;
+
+const puzzleWithCrossword = Prisma.validator<Prisma.PuzzleDefaultArgs>()({
+  include: { crossword: { include: { clues: true } } },
+});
+
+export type PuzzleWithCrossword = Prisma.PuzzleGetPayload<
+  typeof puzzleWithCrossword
+>;
