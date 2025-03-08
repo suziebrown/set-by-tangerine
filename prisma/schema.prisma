@@ -21,7 +21,7 @@ model Puzzle {
     id               Int        @id @default(autoincrement())
     title            String
     setBy            String
-    blurb            String
+    blurb            String?
     publishedAt      DateTime
     firstPublishedAt DateTime?
     downloadUrl      String?
@@ -44,7 +44,7 @@ model Crossword {
     id           Int    @id @default(autoincrement())
     puzzleId     Int    @unique
     puzzle       Puzzle @relation(fields: [puzzleId], references: [id])
-    instructions String
+    instructions String?
     clues        Clue[]
 }
 

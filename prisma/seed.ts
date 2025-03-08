@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import insidersCrosswordData from "./crossword-data/insiders.json";
+import helloMyNameIsCrosswordData from "./crossword-data/hello-my-name-is.json";
 
 const prisma = new PrismaClient();
 
@@ -42,6 +43,37 @@ async function seedData(): Promise<void> {
         data: {
           ...clue,
           crossword: { connect: { id: insidersPuzzle.crossword!.id } },
+        },
+      });
+      return response;
+    }),
+  );
+
+  const helloMyNameIsPuzzle = await prisma.puzzle.create({
+    data: {
+      title: "Hello My Name Is",
+      setBy: "Tangerine",
+      blurb: "",
+      publishedAt: new Date(2025, 1, 16, 14, 0, 0),
+      firstPublishedAt: new Date(2025, 1, 16, 14, 0, 0),
+      downloadUrl: "hello-my-name-is.pdf",
+      imageUrl: "hello-my-name-is_grid.jpg",
+      tags: {
+        connect: [{ label: "crossword" }],
+      },
+      crossword: {
+        create: { instructions: helloMyNameIsCrosswordData.instructions },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await Promise.all(
+    helloMyNameIsCrosswordData.clues.map(async (clue) => {
+      const response = await prisma.clue.create({
+        data: {
+          ...clue,
+          crossword: { connect: { id: helloMyNameIsPuzzle.crossword!.id } },
         },
       });
       return response;
