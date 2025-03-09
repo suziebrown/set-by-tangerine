@@ -17,6 +17,10 @@ jobs:
       - name: Install browsers
         run: npx playwright install --with-deps
       - name: Run tests
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_IMAGES_BLOB_PREFIX: ${{ secrets.NEXT_PUBLIC_IMAGES_BLOB_PREFIX }}
+          NEXT_PUBLIC_PRINT_BLOB_PREFIX: ${{ secrets.NEXT_PUBLIC_PRINT_BLOB_PREFIX }}
         run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
