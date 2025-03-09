@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { BrowsePage } from "./browse-page";
+import { BrowsePage } from "./browse.pom";
 
 test.beforeEach(async ({ page }) => {
   const browsePage = new BrowsePage(page);
@@ -18,10 +18,18 @@ test("displays puzzle cards", async ({ page }) => {
   browsePage.expectPuzzleTitles(["Insiders", "Hello My Name Is"]);
 });
 
+test("displays tags on puzzle card", async ({ page }) => {
+  const browsePage = new BrowsePage(page);
+  const puzzleCard = browsePage.getPuzzleCard("Insiders");
+
+  await puzzleCard.expectTags(["crossword"]);
+});
+
 test("clicking a card navigates to puzzle detail page", async ({ page }) => {
   const browsePage = new BrowsePage(page);
+  const card = browsePage.getPuzzleCard("Insiders");
 
-  await browsePage.clickPuzzleCard("Insiders");
+  await card.click();
 
   expect(page.url()).toMatch("/puzzle/");
 });

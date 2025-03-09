@@ -1,5 +1,6 @@
 import { expect, Page } from "@playwright/test";
-import { BasePage } from "./base-page";
+import { BasePage } from "../base.pom";
+import { CardLocator } from "./card.locator";
 
 export class BrowsePage extends BasePage {
   readonly url = "browse";
@@ -12,14 +13,13 @@ export class BrowsePage extends BasePage {
     await this.page.goto(this.url);
   }
 
-  async expectPuzzleTitles(titles: string[]) {
+  expectPuzzleTitles(titles: string[]) {
     titles.forEach((title) => {
       expect(this.page.getByRole("link", { name: title })).toBeVisible();
     });
   }
 
-  async clickPuzzleCard(title: string) {
-    const puzzleCard = this.page.getByRole("link", { name: title });
-    await puzzleCard.click();
+  getPuzzleCard(title: string) {
+    return new CardLocator(this.page.getByRole("link", { name: title }));
   }
 }
