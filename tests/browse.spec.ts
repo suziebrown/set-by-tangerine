@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await browsePage.goto();
 });
 
-test("should display the heading", async ({ page }) => {
+test("displays page heading", async ({ page }) => {
   const browsePage = new BrowsePage(page);
   await browsePage.expectHeading("Browse puzzles");
 });
