@@ -1,7 +1,7 @@
 "use client";
 
-import Crossword from "~/app/_components/crossword";
-import DownloadButton from "~/app/_components/download-button";
+import Crossword from "~/app/puzzle/[id]/crossword";
+import DownloadButton from "@components/download-button";
 import Title from "../../_components/title";
 import { useState } from "react";
 import { type PuzzleWithCrossword } from "prisma/types";

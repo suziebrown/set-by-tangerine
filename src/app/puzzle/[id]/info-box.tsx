@@ -1,5 +1,5 @@
 import { type PuzzleWithCrossword } from "prisma/types";
-import { Badge } from "~/app/_components/badge";
+import { Badge } from "@components/badge";
 
 export default function InfoBox({
   puzzleDetails,

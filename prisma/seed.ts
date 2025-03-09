@@ -28,7 +28,7 @@ async function seedData(): Promise<void> {
       downloadUrl: "insiders.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
-        create: [{ label: "crossword" }],
+        create: [{ label: "crossword" }, { label: "cryptic" }],
       },
       crossword: {
         create: { instructions: insidersCrosswordData.instructions },
@@ -59,7 +59,7 @@ async function seedData(): Promise<void> {
       downloadUrl: "hello-my-name-is.pdf",
       imageUrl: "hello-my-name-is_grid.png",
       tags: {
-        connect: [{ label: "crossword" }],
+        connect: [{ label: "crossword" }, { label: "cryptic" }],
       },
       crossword: {
         create: { instructions: helloMyNameIsCrosswordData.instructions },
