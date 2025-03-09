@@ -1,0 +1,56 @@
+"use client";
+
+import Crossword from "~/app/_components/crossword";
+import DownloadButton from "~/app/_components/download-button";
+import Title from "../../_components/title";
+import { useState } from "react";
+import { type PuzzleWithCrossword } from "prisma/types";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import InfoBox from "./info-box";
+
+export default function PuzzleDetail({
+  puzzleDetails,
+}: {
+  puzzleDetails: PuzzleWithCrossword;
+}) {
+  const [hideInfo, setHideInfo] = useState(false);
+
+  return (
+    <>
+      <div className="space-between flex w-full items-center">
+        <span className="inline-flex flex-grow items-center">
+          <Title>{puzzleDetails.title}</Title>
+
+          <button
+            onClick={() => setHideInfo((show) => !show)}
+            className="h-8 w-8 text-orange-500 hover:text-orange-600"
+            aria-label={hideInfo ? "Show info" : "Hide info"}
+          >
+            <FontAwesomeIcon className="h-4 w-4" icon={faInfoCircle} />
+          </button>
+        </span>
+
+        {puzzleDetails.downloadUrl && (
+          <DownloadButton url={puzzleDetails.downloadUrl} />
+        )}
+      </div>
+
+      {!hideInfo && <InfoBox puzzleDetails={puzzleDetails} />}
+
+      {puzzleDetails?.imageUrl && (
+        <img
+          src={
+            process.env.NEXT_PUBLIC_IMAGES_BLOB_PREFIX + puzzleDetails.imageUrl
+          }
+          alt={puzzleDetails.imageUrl}
+          className="max-w-[600px]"
+        />
+      )}
+
+      {puzzleDetails?.crossword && (
+        <Crossword crossword={puzzleDetails.crossword} />
+      )}
+    </>
+  );
+}
