@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npm ci
+        run: npx next build
       - name: Install browsers
         run: npx playwright install --with-deps
       - name: Run tests
