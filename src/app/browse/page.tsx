@@ -1,6 +1,6 @@
-import { PuzzlePreview } from "~/app/_components/puzzle-preview";
+import { PuzzlePreview } from "@app/browse/puzzle-preview";
 import { api } from "~/trpc/server";
-import Title from "../_components/title";
+import Title from "@components/title";
 
 export default async function Browse() {
   const puzzles = await api.puzzle.list();

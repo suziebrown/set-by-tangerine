@@ -1,6 +1,6 @@
 import { type PuzzleWithTags } from "prisma/types";
-import { Badge } from "./badge";
-import { PreviewImage } from "./preview-image";
+import { Badge } from "@components/badge";
+import { PreviewImage } from "@app/browse/preview-image";
 
 export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
   return (

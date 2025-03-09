@@ -41,9 +41,9 @@ model Tag {
 }
 
 model Crossword {
-    id           Int    @id @default(autoincrement())
-    puzzleId     Int    @unique
-    puzzle       Puzzle @relation(fields: [puzzleId], references: [id])
+    id           Int     @id @default(autoincrement())
+    puzzleId     Int     @unique
+    puzzle       Puzzle  @relation(fields: [puzzleId], references: [id])
     instructions String?
     clues        Clue[]
 }
