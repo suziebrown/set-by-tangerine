@@ -13,9 +13,11 @@ jobs:
       - name: Install dependencies
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx next build
+        run: npm install
       - name: Install browsers
         run: npx playwright install --with-deps
+      - name: Build
+        run: npx next build
       - name: Run tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
