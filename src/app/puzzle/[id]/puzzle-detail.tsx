@@ -5,9 +5,9 @@ import DownloadButton from "~/app/_components/download-button";
 import Title from "../../_components/title";
 import { useState } from "react";
 import { type PuzzleWithCrossword } from "prisma/types";
-import { faCircleInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Badge } from "~/app/_components/badge";
+import InfoBox from "./info-box";
 
 export default function PuzzleDetail({
   puzzleDetails,
@@ -36,30 +36,7 @@ export default function PuzzleDetail({
         )}
       </div>
 
-      {!hideInfo && (
-        <div className="flex flex-col gap-2 rounded-lg border-2 border-orange-500/30 bg-white/20 p-4">
-          <i className="text-sm">
-            Published on{" "}
-            {puzzleDetails.firstPublishedAt
-              ? puzzleDetails.firstPublishedAt.toLocaleDateString()
-              : puzzleDetails.publishedAt.toLocaleDateString()}
-          </i>
-
-          {puzzleDetails.blurb && (
-            <p className="text-pretty">{puzzleDetails.blurb}</p>
-          )}
-
-          {puzzleDetails.tags.length > 0 && (
-            <ul>
-              {puzzleDetails.tags.map((tag) => (
-                <li key={tag.id}>
-                  <Badge label={tag.label} />
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
+      {!hideInfo && <InfoBox puzzleDetails={puzzleDetails} />}
 
       {puzzleDetails?.imageUrl && (
         <img
