@@ -17,3 +17,11 @@ test("displays puzzle cards", async ({ page }) => {
 
   browsePage.expectPuzzleTitles(["Insiders", "Hello My Name Is"]);
 });
+
+test("clicking a card navigates to puzzle detail page", async ({ page }) => {
+  const browsePage = new BrowsePage(page);
+
+  await browsePage.clickPuzzleCard("Insiders");
+
+  expect(page.url()).toMatch("/puzzle/");
+});

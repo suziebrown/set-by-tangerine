@@ -17,4 +17,9 @@ export class BrowsePage extends BasePage {
       expect(this.page.getByRole("link", { name: title })).toBeVisible();
     });
   }
+
+  async clickPuzzleCard(title: string) {
+    const puzzleCard = this.page.getByRole("link", { name: title });
+    await puzzleCard.click();
+  }
 }
