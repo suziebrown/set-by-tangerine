@@ -1,6 +1,5 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { BasePage } from "../base.pom";
-import { CardLocator } from "./card.locator";
 
 export class BrowsePage extends BasePage {
   readonly url = "browse";
@@ -15,11 +14,18 @@ export class BrowsePage extends BasePage {
 
   expectPuzzleTitles(titles: string[]) {
     titles.forEach((title) => {
-      expect(this.page.getByRole("link", { name: title })).toBeVisible();
+      expect(this.page.getByRole("heading", { name: title })).toBeVisible();
     });
   }
 
   getPuzzleCard(title: string) {
-    return new CardLocator(this.page.getByRole("link", { name: title }));
+    return this.page.getByRole("link", { name: title });
+  }
+
+  async expectTags(puzzleCard: Locator, tags: string[]) {
+    tags.forEach(async (tag) => {
+      const badges = await puzzleCard.getByRole("listitem").allTextContents();
+      expect(badges).toContain(tag);
+    });
   }
 }

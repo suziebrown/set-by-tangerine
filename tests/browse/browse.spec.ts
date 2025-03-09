@@ -20,16 +20,15 @@ test("displays puzzle cards", async ({ page }) => {
 
 test("displays tags on puzzle card", async ({ page }) => {
   const browsePage = new BrowsePage(page);
-  const puzzleCard = browsePage.getPuzzleCard("Insiders");
+  const card = browsePage.getPuzzleCard("Insiders");
 
-  await puzzleCard.expectTags(["crossword"]);
+  await browsePage.expectTags(card, ["crossword"]);
 });
 
 test("clicking a card navigates to puzzle detail page", async ({ page }) => {
   const browsePage = new BrowsePage(page);
-  const card = browsePage.getPuzzleCard("Insiders");
 
-  await card.click();
+  await browsePage.getPuzzleCard("Insiders").click();
 
   expect(page.url()).toMatch("/puzzle/");
 });
