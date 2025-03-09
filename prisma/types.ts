@@ -15,7 +15,7 @@ export type CrosswordWithClues = Prisma.CrosswordGetPayload<
 >;
 
 const puzzleWithCrossword = Prisma.validator<Prisma.PuzzleDefaultArgs>()({
-  include: { crossword: { include: { clues: true } } },
+  include: { tags: true, crossword: { include: { clues: true } } },
 });
 
 export type PuzzleWithCrossword = Prisma.PuzzleGetPayload<
