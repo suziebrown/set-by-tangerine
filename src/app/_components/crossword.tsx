@@ -7,7 +7,7 @@ export default function Crossword(props: { crossword: CrosswordWithClues }) {
         <p className="text-pretty">{props.crossword.instructions}</p>
       )}
 
-      <div className="gap-12 lg:flex">
+      <div className="flex flex-col gap-12 lg:flex-row">
         <div>
           <h2 className="mb-2 font-bold">Across</h2>
           <table>
