@@ -17,6 +17,10 @@ jobs:
       - name: Install browsers
         run: npx playwright install --with-deps
       - name: Build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_IMAGES_BLOB_PREFIX: ${{ secrets.NEXT_PUBLIC_IMAGES_BLOB_PREFIX }}
+          NEXT_PUBLIC_PRINT_BLOB_PREFIX: ${{ secrets.NEXT_PUBLIC_PRINT_BLOB_PREFIX }}
         run: npx next build
       - name: Run tests
         env:
