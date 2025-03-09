@@ -8,5 +8,12 @@ test.beforeEach(async ({ page }) => {
 
 test("displays page heading", async ({ page }) => {
   const browsePage = new BrowsePage(page);
+
   await browsePage.expectHeading("Browse puzzles");
+});
+
+test("displays puzzle cards", async ({ page }) => {
+  const browsePage = new BrowsePage(page);
+
+  browsePage.expectPuzzleTitles(["Insiders", "Hello My Name Is"]);
 });

@@ -8,5 +8,6 @@ test.beforeEach(async ({ page }) => {
 
 test("displays puzzle title", async ({ page }) => {
   const insidersCrosswordDetailPage = new PuzzleDetailPage(page);
+
   await insidersCrosswordDetailPage.expectHeading("Insiders");
 });

@@ -1,8 +1,8 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { BasePage } from "./base-page";
 
 export class BrowsePage extends BasePage {
-  readonly url = "http://localhost:3000/browse";
+  readonly url = "browse";
 
   constructor(page: Page) {
     super(page);
@@ -10,5 +10,11 @@ export class BrowsePage extends BasePage {
 
   async goto() {
     await this.page.goto(this.url);
+  }
+
+  async expectPuzzleTitles(titles: string[]) {
+    titles.forEach((title) => {
+      expect(this.page.getByRole("link", { name: title })).toBeVisible();
+    });
   }
 }

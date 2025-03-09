@@ -7,7 +7,7 @@ export class PuzzleDetailPage extends BasePage {
   }
 
   async goto() {
-    await this.page.goto("http://localhost:3000/browse");
+    await this.page.goto("browse");
     const puzzleCard = this.page.getByRole("link", { name: "Insiders" });
     await puzzleCard.click();
   }
