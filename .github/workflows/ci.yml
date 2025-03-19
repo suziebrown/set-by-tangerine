@@ -1,11 +1,12 @@
-name: Playwright Tests
+name: CI
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 jobs:
-  test:
+  playwright:
+    name: Playwright Tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -34,3 +35,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  lighthouse:
+    name: Lighthouse Audit
+    uses: TrellisCommerce/vercel-lighthouse-score-action@1.0.1
