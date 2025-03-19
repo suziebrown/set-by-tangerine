@@ -30,46 +30,10 @@ jobs:
           poll-interval: 15
 
       - name: Audit preview URL with Lighthouse
+        uses: foo-software/lighthouse-check-action@master
         id: lighthouse_audit
-        run: npx lighthouse-ci ${{ steps.vercel_preview_url.outputs.url }} --extra-headers "{\"x-vercel-protection-bypass\":\"${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}\"}"
-
-      - name: Format lighthouse score
-        id: format_lighthouse_score
-        uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const result = ${{ steps.lighthouse_audit.outputs.manifest }}[0].summary
-            const links = ${{ steps.lighthouse_audit.outputs.links }}
-
-            const formatResult = (res) => Math.round((res * 100))
-            Object.keys(result).forEach(key => result[key] = formatResult(result[key]))
-
-            const score = res => res >= 90 ? '🟢' : res >= 50 ? '🟠' : '🔴'
-
-            const comment = [
-                `⚡️ [Lighthouse report](${Object.values(links)[0]}) for the changes in this PR:`,
-                '| Category | Score |',
-                '| --- | --- |',
-                `| ${score(result.performance)} Performance | ${result.performance} |`,
-                `| ${score(result.accessibility)} Accessibility | ${result.accessibility} |`,
-                `| ${score(result['best-practices'])} Best practices | ${result['best-practices']} |`,
-                `| ${score(result.seo)} SEO | ${result.seo} |`,
-                `| ${score(result.pwa)} PWA | ${result.pwa} |`,
-                ' ',
-                `*Lighthouse ran on [${Object.keys(links)[0]}](${Object.keys(links)[0]})*`
-            ].join('\n')
-
-             core.setOutput("comment", comment);
-
-      - name: Add comment to PR
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              issue_number: context.issue.number,
-              repo: context.repo.repo,
-              body: ${{ steps.format_lighthouse_score.outputs.comment }}
-            })
+          urls: ${{ steps.vercel_preview_url.outputs.url }}
+          extraHeaders: '{ "x-vercel-protection-bypass": "${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}"}'
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+          prCommentEnabled: true
