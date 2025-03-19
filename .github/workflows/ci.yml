@@ -35,18 +35,17 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+          
   lighthouse:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for Vercel deployment
-        uses: UnlyEd/github-action-await-vercel@v1.2.14
+      - name: Waiting for 200 from the Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
         id: await-vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
-          deployment-url: ${{ github.event.deployment_status.target_url }}
-          timeout: 10 # Wait for 10 seconds before failing
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
 
       - uses: actions/checkout@v2
 
@@ -54,8 +53,7 @@ jobs:
         id: lighthouse_audit
         uses: treosh/lighthouse-ci-action@v3
         with:
-          urls: |
-            ${{ github.event.deployment_status.target_url }}
+          urls: ${{ steps.await-vercel.outputs.url }}
           uploadArtifacts: true
           temporaryPublicStorage: true
 
