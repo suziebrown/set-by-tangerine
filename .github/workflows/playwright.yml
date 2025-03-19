@@ -40,6 +40,9 @@ jobs:
         env:
           DEPLOYMENT_URL: ${{ format('https://{0}', steps.vercel_preview_url.outputs.preview_url) }}
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_IMAGES_BLOB_PREFIX: ${{ secrets.NEXT_PUBLIC_IMAGES_BLOB_PREFIX }}
+          NEXT_PUBLIC_PRINT_BLOB_PREFIX: ${{ secrets.NEXT_PUBLIC_PRINT_BLOB_PREFIX }}
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
