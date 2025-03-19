@@ -8,7 +8,11 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL: process.env.DEPLOYMENT_URL ?? "http://127.0.0.1:3000",
+    extraHTTPHeaders: {
+      "X-Vercel-Protection-Bypass":
+        process.env.VERCEL_AUTOMATION_BYPASS_SECRET ?? "",
+    },
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
