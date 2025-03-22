@@ -1,7 +1,7 @@
 import { type GuardianClue, type GuardianCrossword } from "mycrossword";
 import { type SeparatorLocationsOptional } from "node_modules/mycrossword/dist/types";
 
-type MyCrosswordData = Omit<
+type MyCrosswordBaseData = Omit<
   GuardianCrossword,
   | "id"
   | "name"
@@ -17,7 +17,14 @@ type MyCrosswordData = Omit<
   })[];
 };
 
-const foo: MyCrosswordData = {
+type MyCrosswordData = MyCrosswordBaseData & {
+  solutionAvailable: true;
+  entries: (MyCrosswordBaseData["entries"][number] & {
+    length: number;
+  })[];
+};
+
+const foo: MyCrosswordBaseData = {
   dimensions: {
     cols: 15,
     rows: 15,
@@ -66,7 +73,7 @@ const foo: MyCrosswordData = {
   ],
 };
 
-export const testData: MyCrosswordData & { solutionAvailable: true } = {
+export const testData: MyCrosswordData = {
   ...foo,
   solutionAvailable: true,
   entries: foo.entries.map((entry) => ({
