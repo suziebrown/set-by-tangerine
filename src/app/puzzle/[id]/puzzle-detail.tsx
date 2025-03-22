@@ -1,12 +1,12 @@
 "use client";
 
-import Crossword from "~/app/puzzle/[id]/crossword";
 import DownloadButton from "@components/download-button";
-import Title from "../../_components/title";
-import { useState } from "react";
-import { type PuzzleWithCrossword } from "prisma/types";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { type PuzzleWithCrossword } from "prisma/types";
+import { useState } from "react";
+import Crossword from "~/app/puzzle/[id]/crossword";
+import Title from "../../_components/title";
 import InfoBox from "./info-box";
 
 export default function PuzzleDetail({

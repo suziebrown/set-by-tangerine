@@ -1,8 +1,14 @@
 import { type CrosswordWithClues } from "prisma/types";
+import { MyCrossword } from "mycrossword";
+import { testData } from "../../../hello-my-name-is";
+
+// QQ Save crossword data (JSON stringified) into db and JSON.parse on retrieval
 
 export default function Crossword(props: { crossword: CrosswordWithClues }) {
   return (
     <>
+      <MyCrossword id="crossword-1" data={testData} theme="deepOrange" />
+
       {props.crossword.instructions && (
         <p className="text-pretty">{props.crossword.instructions}</p>
       )}
