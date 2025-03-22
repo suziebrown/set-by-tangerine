@@ -8,24 +8,20 @@ import {
 
 export const mapMyCrosswordData = (
   basicData: MyCrosswordBasicData,
-): MyCrosswordData => {
-  const foo: MyCrosswordData = {
-    ...basicData,
-    solutionAvailable: true,
-    entries: basicData.entries.map((entry) => ({
-      ...entry,
-      id: getId(entry),
-      separatorLocations: entry.separatorLocations ?? {},
-      clue: entry.clue + " (" + getSolution(entry).length + ")", // QQ Logic will need to be more sophisticated
-      solution: getSolution(entry),
-      length: getSolution(entry).length,
-      group: entry.group ?? [getId(entry)],
-      humanNumber: entry.humanNumber ?? entry.number.toString(),
-    })),
-  };
-  console.log(foo);
-  return foo;
-};
+): MyCrosswordData => ({
+  ...basicData,
+  solutionAvailable: true,
+  entries: basicData.entries.map((entry) => ({
+    ...entry,
+    id: getId(entry),
+    separatorLocations: entry.separatorLocations ?? {},
+    clue: entry.clue + " (" + getSolution(entry).length + ")", // QQ Logic will need to be more sophisticated for split answers
+    solution: getSolution(entry),
+    length: getSolution(entry).length,
+    group: entry.group ?? [getId(entry)],
+    humanNumber: entry.humanNumber ?? entry.number.toString(),
+  })),
+});
 
 const getId = (entry: MyCrosswordBasicClue): string =>
   entry.number.toString() + (entry.direction === "across" ? "a" : "d");
