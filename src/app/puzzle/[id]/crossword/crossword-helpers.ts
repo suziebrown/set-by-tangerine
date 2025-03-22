@@ -16,9 +16,9 @@ export const mapMyCrosswordData = (
       ...entry,
       id: getId(entry),
       separatorLocations: entry.separatorLocations ?? {},
-      clue: entry.clue + " (" + entry.solution.length + ")", // QQ Logic will need to be more sophisticated
-      solution: entry.solution.toUpperCase(),
-      length: entry.solution.length,
+      clue: entry.clue + " (" + getSolution(entry).length + ")", // QQ Logic will need to be more sophisticated
+      solution: getSolution(entry),
+      length: getSolution(entry).length,
       group: entry.group ?? [getId(entry)],
       humanNumber: entry.humanNumber ?? entry.number.toString(),
     })),
@@ -29,3 +29,6 @@ export const mapMyCrosswordData = (
 
 const getId = (entry: MyCrosswordBasicClue): string =>
   entry.number.toString() + (entry.direction === "across" ? "a" : "d");
+
+const getSolution = (entry: MyCrosswordBasicClue): string =>
+  entry.solution.toUpperCase().replaceAll(/\s|-|'/g, "");
