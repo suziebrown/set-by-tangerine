@@ -1,4 +1,5 @@
 import {
+  type MyCrosswordBasicClue,
   type MyCrosswordBasicData,
   type MyCrosswordData,
 } from "./crossword.type";
@@ -8,15 +9,23 @@ import {
 export const mapMyCrosswordData = (
   basicData: MyCrosswordBasicData,
 ): MyCrosswordData => {
-  return {
+  const foo: MyCrosswordData = {
     ...basicData,
     solutionAvailable: true,
     entries: basicData.entries.map((entry) => ({
       ...entry,
+      id: getId(entry),
       separatorLocations: entry.separatorLocations ?? {},
       clue: entry.clue + " (" + entry.solution.length + ")", // QQ Logic will need to be more sophisticated
-      solution: entry.solution.toLocaleUpperCase(),
+      solution: entry.solution.toUpperCase(),
       length: entry.solution.length,
+      group: entry.group ?? [getId(entry)],
+      humanNumber: entry.humanNumber ?? entry.number.toString(),
     })),
   };
+  console.log(foo);
+  return foo;
 };
+
+const getId = (entry: MyCrosswordBasicClue): string =>
+  entry.number.toString() + (entry.direction === "across" ? "a" : "d");

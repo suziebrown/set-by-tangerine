@@ -9,7 +9,7 @@ export default function Crossword(props: { crossword: CrosswordWithClues }) {
   return (
     <>
       <MyCrossword
-        id="crossword-1"
+        id={props.crossword.id.toString()}
         data={mapMyCrosswordData(helloMyNameIs)}
         theme="deepOrange"
       />
