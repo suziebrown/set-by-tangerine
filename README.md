@@ -10,3 +10,8 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 - Blob storage: points at the production blob!
 - Client: run `npm run dev` to start up the client at http://localhost:3000/
 - Tests: `npm run test`
+
+## How to edit the data schema
+
+1. Make changes to schema.prisma
+2. Run `npm run db:generate` to generate a SQL migration capturing the changes

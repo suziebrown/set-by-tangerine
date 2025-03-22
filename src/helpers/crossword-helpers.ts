@@ -2,7 +2,7 @@ import {
   type MyCrosswordBasicClue,
   type MyCrosswordBasicData,
   type MyCrosswordData,
-} from "./crossword.type";
+} from "../app/puzzle/[id]/crossword/crossword.type";
 
 // QQ Add tests
 

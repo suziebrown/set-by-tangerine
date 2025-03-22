@@ -1,11 +1,11 @@
 import { MyCrossword } from "mycrossword";
-import { type CrosswordWithClues } from "prisma/types";
-import { helloMyNameIs } from "../../../../hello-my-name-is";
-import { mapMyCrosswordData } from "./crossword-helpers";
+import { helloMyNameIs } from "../../../../../prisma/crossword-data/hello-my-name-is";
+import { mapMyCrosswordData } from "../../../../helpers/crossword-helpers";
+import { type Crossword as PrismaCrossword } from "@prisma/client";
 
 // QQ Save crossword data (JSON stringified) into db and JSON.parse on retrieval
 
-export default function Crossword(props: { crossword: CrosswordWithClues }) {
+export default function Crossword(props: { crossword: PrismaCrossword }) {
   return (
     <>
       {props.crossword.instructions && (
