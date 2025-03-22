@@ -1,30 +1,9 @@
-import { type GuardianClue, type GuardianCrossword } from "mycrossword";
-import { type SeparatorLocationsOptional } from "node_modules/mycrossword/dist/types";
+import {
+  type MyCrosswordBasicData,
+  MyCrosswordData,
+} from "./app/puzzle/[id]/crossword/crossword.type";
 
-type MyCrosswordBaseData = Omit<
-  GuardianCrossword,
-  | "id"
-  | "name"
-  | "number"
-  | "date"
-  | "crosswordType"
-  | "solutionAvailable"
-  | "entries"
-> & {
-  entries: (Omit<GuardianClue, "solution" | "separatorLocations" | "length"> & {
-    solution: string;
-    separatorLocations?: SeparatorLocationsOptional | undefined;
-  })[];
-};
-
-type MyCrosswordData = MyCrosswordBaseData & {
-  solutionAvailable: true;
-  entries: (MyCrosswordBaseData["entries"][number] & {
-    length: number;
-  })[];
-};
-
-const foo: MyCrosswordBaseData = {
+export const helloMyNameIs: MyCrosswordBasicData = {
   dimensions: {
     cols: 15,
     rows: 15,
@@ -71,16 +50,4 @@ const foo: MyCrosswordBaseData = {
       solution: "era",
     },
   ],
-};
-
-export const testData: MyCrosswordData = {
-  ...foo,
-  solutionAvailable: true,
-  entries: foo.entries.map((entry) => ({
-    ...entry,
-    separatorLocations: entry.separatorLocations ?? {},
-    clue: entry.clue + " (" + entry.solution.length + ")", // QQ Logic will need to be more sophisticated
-    solution: entry.solution.toLocaleUpperCase(),
-    length: entry.solution.length,
-  })),
 };

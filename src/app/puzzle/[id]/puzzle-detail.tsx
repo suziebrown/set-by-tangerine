@@ -5,7 +5,7 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type PuzzleWithCrossword } from "prisma/types";
 import { useState } from "react";
-import Crossword from "~/app/puzzle/[id]/crossword";
+import Crossword from "~/app/puzzle/[id]/crossword/crossword";
 import Title from "../../_components/title";
 import InfoBox from "./info-box";
 
@@ -37,16 +37,6 @@ export default function PuzzleDetail({
       </div>
 
       {!hideInfo && <InfoBox puzzleDetails={puzzleDetails} />}
-
-      {puzzleDetails?.imageUrl && (
-        <img
-          src={
-            process.env.NEXT_PUBLIC_IMAGES_BLOB_PREFIX + puzzleDetails.imageUrl
-          }
-          alt={puzzleDetails.imageUrl}
-          className="max-w-[600px]"
-        />
-      )}
 
       {puzzleDetails?.crossword && (
         <Crossword crossword={puzzleDetails.crossword} />
