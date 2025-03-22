@@ -1,10 +1,22 @@
 import {
+  type JsonValue,
+  type JsonObject,
+} from "@prisma/client/runtime/library";
+import {
   type MyCrosswordBasicClue,
   type MyCrosswordBasicData,
   type MyCrosswordData,
 } from "../app/puzzle/[id]/crossword/crossword.type";
 
 // QQ Add tests
+export const parseCrosswordDataJson = (
+  json?: JsonValue,
+): MyCrosswordData | null => {
+  if (json == null) return null;
+
+  const crosswordData = JSON.parse(json as string) as MyCrosswordData;
+  return mapMyCrosswordData(crosswordData);
+};
 
 export const mapMyCrosswordData = (
   basicData: MyCrosswordBasicData,

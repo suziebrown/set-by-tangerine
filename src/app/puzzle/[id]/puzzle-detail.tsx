@@ -8,6 +8,7 @@ import { useState } from "react";
 import Crossword from "~/app/puzzle/[id]/crossword/crossword";
 import Title from "../../_components/title";
 import InfoBox from "./info-box";
+import { parseCrosswordDataJson } from "~/helpers/crossword-helpers";
 
 export default function PuzzleDetail({
   puzzleDetails,
@@ -15,6 +16,8 @@ export default function PuzzleDetail({
   puzzleDetails: PuzzleWithCrossword;
 }) {
   const [hideInfo, setHideInfo] = useState(false);
+
+  const crosswordData = parseCrosswordDataJson(puzzleDetails?.crossword?.data);
 
   return (
     <>
@@ -38,8 +41,12 @@ export default function PuzzleDetail({
 
       {!hideInfo && <InfoBox puzzleDetails={puzzleDetails} />}
 
-      {puzzleDetails?.crossword && (
-        <Crossword crossword={puzzleDetails.crossword} />
+      {puzzleDetails?.crossword && crosswordData && (
+        <Crossword
+          id={puzzleDetails.crossword.id}
+          instructions={puzzleDetails.crossword.instructions}
+          data={crosswordData}
+        />
       )}
     </>
   );

@@ -1,8 +1,4 @@
-import {
-  MyCrossword,
-  type GuardianClue,
-  type GuardianCrossword,
-} from "mycrossword";
+import { type GuardianClue, type GuardianCrossword } from "mycrossword";
 import { type SeparatorLocationsOptional } from "node_modules/mycrossword/dist/types";
 
 export type MyCrosswordBasicClue = Omit<

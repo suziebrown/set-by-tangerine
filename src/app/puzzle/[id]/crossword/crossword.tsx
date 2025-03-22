@@ -1,20 +1,20 @@
 import { MyCrossword } from "mycrossword";
-import { helloMyNameIs } from "../../../../../prisma/crossword-data/hello-my-name-is";
-import { mapMyCrosswordData } from "../../../../helpers/crossword-helpers";
-import { type Crossword as PrismaCrossword } from "@prisma/client";
+import { type MyCrosswordData } from "./crossword.type";
 
-// QQ Save crossword data (JSON stringified) into db and JSON.parse on retrieval
-
-export default function Crossword(props: { crossword: PrismaCrossword }) {
+export default function Crossword(props: {
+  id: number;
+  instructions: string | null;
+  data: MyCrosswordData;
+}) {
   return (
     <>
-      {props.crossword.instructions && (
-        <p className="text-pretty">{props.crossword.instructions}</p>
+      {props.instructions && (
+        <p className="text-pretty">{props.instructions}</p>
       )}
 
       <MyCrossword
-        id={props.crossword.id.toString()}
-        data={mapMyCrosswordData(helloMyNameIs)}
+        id={props.id.toString()}
+        data={props.data}
         theme="deepOrange"
       />
     </>

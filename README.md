@@ -15,3 +15,5 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 
 1. Make changes to schema.prisma
 2. Run `npm run db:generate` to generate a SQL migration capturing the changes
+3. Run `npm run postinstall` to drop and reseed the static data (this won't be a post-install step forever, but it is for now!)
+4. Restart the `npm run dev` process if it's running
