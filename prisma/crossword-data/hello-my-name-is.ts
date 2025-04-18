@@ -1,7 +1,4 @@
-import {
-  type MyCrosswordBasicData,
-  MyCrosswordData,
-} from "../../src/app/puzzle/[id]/crossword/crossword.type";
+import { type MyCrosswordBasicData } from "~/app/puzzle/[id]/crossword/crossword.type";
 
 export const helloMyNameIs: MyCrosswordBasicData = {
   dimensions: {

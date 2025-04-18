@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
+import { insiders } from "./crossword-data/insiders";
 
 const prisma = new PrismaClient();
 
@@ -32,7 +33,7 @@ async function seedData(): Promise<void> {
         create: {
           instructions:
             "The wordplay in 22 clues leads to an extra letter. In clue order, these spell a thematic slogan.",
-          data: JSON.stringify(helloMyNameIs), // QQ create the Insiders crossword data
+          data: JSON.stringify(insiders),
         },
       },
     },
