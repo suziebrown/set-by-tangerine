@@ -38,7 +38,7 @@ const mapCrosswordEntry = (
     ...entry,
     id: id,
     separatorLocations: entry.separatorLocations ?? getSeparators(entry),
-    clue: entry.clue + " (" + getHumanWordLengths(entry, id, allEntries) + ")",
+    clue: getNormalisedClue(entry, id, allEntries),
     solution: normalisedSolution,
     length: normalisedSolution.length,
     group: entry.group ?? [id],
@@ -46,11 +46,42 @@ const mapCrosswordEntry = (
   };
 };
 
+// QQ Add tests for the lower-level helper functions too
 const getId = (entry: MyCrosswordBasicClue): string =>
   entry.number.toString() + (entry.direction === "across" ? "a" : "d");
 
 const getNormalisedSolution = (entry: MyCrosswordBasicClue): string =>
   entry.solution.toUpperCase().replaceAll(/\s|-|'/g, "");
+
+const getNormalisedClue = (
+  entry: MyCrosswordBasicClue,
+  id: string,
+  allEntries: MyCrosswordBasicClue[],
+): string => {
+  if (entry.group && entry.group.length > 1 && entry.group[0] !== id) {
+    const firstLinkedClue = entry.group[0]!;
+    const firstLinkedClueNumber = firstLinkedClue.slice(0, -1);
+
+    // QQ look up the actual linked clue
+    if (firstLinkedClue.endsWith("a")) {
+      if (entry.direction === "across") {
+        return `See ${firstLinkedClueNumber}`;
+      }
+      return `See ${firstLinkedClueNumber} across`;
+    } else if (firstLinkedClue.endsWith("d")) {
+      if (entry.direction === "down") {
+        return `See ${firstLinkedClueNumber}`;
+      }
+      return `See ${firstLinkedClueNumber} down`;
+    }
+
+    throw new Error(
+      `Error in clue '${id}': Couldn't establish direction of first linked clue.`,
+    );
+  }
+
+  return entry.clue + " (" + getHumanWordLengths(entry, id, allEntries) + ")";
+};
 
 const getLinkedNormalisedSolution = (
   entry: MyCrosswordBasicClue,
