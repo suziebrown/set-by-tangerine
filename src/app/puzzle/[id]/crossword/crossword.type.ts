@@ -24,12 +24,11 @@ export type MyCrosswordBasicData = Omit<
   entries: MyCrosswordBasicClue[];
 };
 
+export type MyCrosswordClue = Omit<GuardianClue, "solution"> & {
+  solution: string;
+};
+
 export type MyCrosswordData = MyCrosswordBasicData & {
   solutionAvailable: true;
-  entries: (MyCrosswordBasicData["entries"][number] & {
-    id: string;
-    length: number;
-    group: string[];
-    humanNumber: string;
-  })[];
+  entries: MyCrosswordClue[];
 };

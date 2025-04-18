@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { BrowsePage } from "./browse.pom";
 
 test.beforeEach(async ({ page }) => {
