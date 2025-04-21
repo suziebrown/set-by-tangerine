@@ -20,7 +20,7 @@ export default function InfoBox({
       )}
 
       {puzzleDetails.tags.length > 0 && (
-        <ul>
+        <ul className="flex flex-wrap gap-1">
           {puzzleDetails.tags.map((tag) => (
             <li key={tag.id}>
               <Badge label={tag.label} />
