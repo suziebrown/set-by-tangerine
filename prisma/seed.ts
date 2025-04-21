@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
 import { insiders } from "./crossword-data/insiders";
+import { partingGift } from "./crossword-data/parting-gift";
 
 const prisma = new PrismaClient();
 
@@ -54,6 +55,26 @@ async function seedData(): Promise<void> {
       },
       crossword: {
         create: { instructions: null, data: JSON.stringify(helloMyNameIs) },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  const partingGiftPuzzle = await prisma.puzzle.create({
+    data: {
+      title: "Parting Gift",
+      setBy: "Tangerine",
+      blurb:
+        "This puzzle was a leaving present to the crossword club at work when I left.",
+      publishedAt: new Date(2025, 3, 21, 14, 0, 0),
+      firstPublishedAt: new Date(2025, 3, 14, 10, 0, 0),
+      downloadUrl: "parting-gift.pdf",
+      imageUrl: "hello-my-name-is_grid.png",
+      tags: {
+        connect: [{ label: "crossword" }, { label: "cryptic" }],
+      },
+      crossword: {
+        create: { instructions: null, data: JSON.stringify(partingGift) },
       },
     },
     include: { crossword: true },

@@ -105,8 +105,8 @@ const getLinkedNormalisedSolution = (
 };
 
 const getLinkedSeparators = (
-  entry: MyCrosswordBasicClue,
-  allEntries: MyCrosswordBasicClue[],
+  entry: Readonly<MyCrosswordBasicClue>,
+  allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): SeparatorLocationsOptional => {
   if (!entry.group || entry.group.length === 1) {
     return getSeparators(entry);
@@ -184,7 +184,7 @@ const getHumanWordLengths = (
 };
 
 const getSeparators = (
-  entry: MyCrosswordBasicClue,
+  entry: Readonly<MyCrosswordBasicClue>,
 ): SeparatorLocationsOptional => {
   if (entry.group && entry.group.length > 1) {
     throw new Error(
@@ -192,12 +192,14 @@ const getSeparators = (
     );
   }
 
+  const solution = entry.solution.replaceAll(/'/g, "");
+
   const spaceLocations: number[] = [];
   const hyphenLocations: number[] = [];
   let separatorCount = 0;
 
-  for (let i = 0; i < entry.solution.length; i++) {
-    const char = entry.solution[i];
+  for (let i = 0; i < solution.length; i++) {
+    const char = solution[i];
     if (char === " ") {
       spaceLocations.push(i - separatorCount);
       separatorCount++;
