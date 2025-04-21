@@ -108,7 +108,49 @@ test.describe("mapMyCrosswordData", () => {
     expect(mappedEntryEnd?.group).toEqual(["1a", "2a"]);
     expect(mappedEntryEnd?.humanNumber).toBe("2");
   });
+
+  test("maps single-word entry split over linked across and down entries", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      direction: "down",
+      group: ["1d", "2a"],
+      separatorLocations: {},
+      solution: "cup",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 2, y: 0 },
+      group: ["1d", "2a"],
+      separatorLocations: {},
+      clue: "",
+      solution: "board",
+    };
+
+    const result = mapMyCrosswordData(
+      setUpBasicCrosswordData([entryStart, entryEnd]),
+    );
+
+    const mappedEntryStart = result.entries[0];
+    expect(mappedEntryStart?.id).toBe("1d");
+    expect(mappedEntryStart?.clue).toBe("Test clue (8)");
+    expect(mappedEntryStart?.solution).toBe("CUP");
+    expect(mappedEntryStart?.length).toBe(3);
+    expect(mappedEntryStart?.humanNumber).toBe("1");
+
+    const mappedEntryEnd = result.entries[1];
+    expect(mappedEntryEnd?.id).toBe("2a");
+    expect(mappedEntryEnd?.clue).toBe("See 1 down");
+    expect(mappedEntryEnd?.solution).toBe("BOARD");
+    expect(mappedEntryEnd?.length).toBe(5);
+    expect(mappedEntryEnd?.humanNumber).toBe("2");
+  });
 });
+
+// TODO other cases to test:
+// linked clues with space/hyphen between parts
+// linked clues with spaces/hyphens within parts
+// more than 2 linked entries with various separators
 
 const testClue: MyCrosswordBasicClue = {
   number: 1,
