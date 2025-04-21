@@ -15,7 +15,7 @@ export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
         {props.puzzle.firstPublishedAt?.toLocaleDateString("en-GB")}
       </span>
 
-      <ul className="mt-2">
+      <ul className="mt-2 flex flex-wrap gap-1">
         {props.puzzle.tags.map((tag) => (
           <li key={tag.id}>
             <Badge label={tag.label} />
