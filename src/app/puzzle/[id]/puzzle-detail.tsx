@@ -1,13 +1,14 @@
 "use client";
 
-import Crossword from "~/app/puzzle/[id]/crossword";
 import DownloadButton from "@components/download-button";
-import Title from "../../_components/title";
-import { useState } from "react";
-import { type PuzzleWithCrossword } from "prisma/types";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { type PuzzleWithCrossword } from "prisma/types";
+import { useState } from "react";
+import Crossword from "~/app/puzzle/[id]/crossword/crossword";
+import Title from "../../_components/title";
 import InfoBox from "./info-box";
+import { parseCrosswordDataJson } from "~/helpers/crossword-helpers";
 
 export default function PuzzleDetail({
   puzzleDetails,
@@ -15,6 +16,8 @@ export default function PuzzleDetail({
   puzzleDetails: PuzzleWithCrossword;
 }) {
   const [hideInfo, setHideInfo] = useState(false);
+
+  const crosswordData = parseCrosswordDataJson(puzzleDetails?.crossword?.data);
 
   return (
     <>
@@ -38,18 +41,12 @@ export default function PuzzleDetail({
 
       {!hideInfo && <InfoBox puzzleDetails={puzzleDetails} />}
 
-      {puzzleDetails?.imageUrl && (
-        <img
-          src={
-            process.env.NEXT_PUBLIC_IMAGES_BLOB_PREFIX + puzzleDetails.imageUrl
-          }
-          alt={puzzleDetails.imageUrl}
-          className="max-w-[600px]"
+      {puzzleDetails?.crossword && crosswordData && (
+        <Crossword
+          id={puzzleDetails.crossword.id}
+          instructions={puzzleDetails.crossword.instructions}
+          data={crosswordData}
         />
-      )}
-
-      {puzzleDetails?.crossword && (
-        <Crossword crossword={puzzleDetails.crossword} />
       )}
     </>
   );

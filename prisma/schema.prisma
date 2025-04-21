@@ -45,15 +45,5 @@ model Crossword {
     puzzleId     Int     @unique
     puzzle       Puzzle  @relation(fields: [puzzleId], references: [id])
     instructions String?
-    clues        Clue[]
-}
-
-model Clue {
-    id          Int       @id @default(autoincrement())
-    crosswordId Int
-    crossword   Crossword @relation(fields: [crosswordId], references: [id])
-    direction   String
-    numberLabel String
-    clue        String
-    lengthLabel String
+    data         Json    @default("{}")
 }

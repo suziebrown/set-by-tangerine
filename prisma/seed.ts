@@ -1,14 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 
-import insidersCrosswordData from "./crossword-data/insiders.json";
-import helloMyNameIsCrosswordData from "./crossword-data/hello-my-name-is.json";
+import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
+import { insiders } from "./crossword-data/insiders";
 
 const prisma = new PrismaClient();
 
 async function clearDatabase(): Promise<void> {
   console.log("Dropping static data from database...");
 
-  await prisma.clue.deleteMany();
   await prisma.crossword.deleteMany();
   await prisma.tag.deleteMany();
   await prisma.puzzle.deleteMany();
@@ -31,23 +30,15 @@ async function seedData(): Promise<void> {
         create: [{ label: "crossword" }, { label: "cryptic" }],
       },
       crossword: {
-        create: { instructions: insidersCrosswordData.instructions },
+        create: {
+          instructions:
+            "The wordplay in 22 clues leads to an extra letter. In clue order, these spell a thematic slogan.",
+          data: JSON.stringify(insiders),
+        },
       },
     },
     include: { crossword: true },
   });
-
-  await Promise.all(
-    insidersCrosswordData.clues.map(async (clue) => {
-      const response = await prisma.clue.create({
-        data: {
-          ...clue,
-          crossword: { connect: { id: insidersPuzzle.crossword!.id } },
-        },
-      });
-      return response;
-    }),
-  );
 
   const helloMyNameIsPuzzle = await prisma.puzzle.create({
     data: {
@@ -62,23 +53,11 @@ async function seedData(): Promise<void> {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
       },
       crossword: {
-        create: { instructions: helloMyNameIsCrosswordData.instructions },
+        create: { instructions: null, data: JSON.stringify(helloMyNameIs) },
       },
     },
     include: { crossword: true },
   });
-
-  await Promise.all(
-    helloMyNameIsCrosswordData.clues.map(async (clue) => {
-      const response = await prisma.clue.create({
-        data: {
-          ...clue,
-          crossword: { connect: { id: helloMyNameIsPuzzle.crossword!.id } },
-        },
-      });
-      return response;
-    }),
-  );
 }
 
 clearDatabase()

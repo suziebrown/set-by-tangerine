@@ -11,8 +11,8 @@ export default function InfoBox({
       <i className="text-sm">
         Published on{" "}
         {puzzleDetails.firstPublishedAt
-          ? puzzleDetails.firstPublishedAt.toLocaleDateString()
-          : puzzleDetails.publishedAt.toLocaleDateString()}
+          ? puzzleDetails.firstPublishedAt.toLocaleDateString("en-GB")
+          : puzzleDetails.publishedAt.toLocaleDateString("en-GB")}
       </i>
 
       {puzzleDetails.blurb && (
