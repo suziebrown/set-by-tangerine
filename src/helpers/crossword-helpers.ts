@@ -46,7 +46,7 @@ const mapCrosswordEntry = (
   };
 };
 
-// QQ Add tests for the lower-level helper functions too
+// TODO Add tests for the lower-level helper functions too
 const getId = (entry: MyCrosswordBasicClue): string =>
   entry.number.toString() + (entry.direction === "across" ? "a" : "d");
 
@@ -62,7 +62,7 @@ const getNormalisedClue = (
     const firstLinkedClue = entry.group[0]!;
     const firstLinkedClueNumber = firstLinkedClue.slice(0, -1);
 
-    // QQ look up the actual linked clue
+    // TODO look up the actual linked clue from allEntries
     if (firstLinkedClue.endsWith("a")) {
       if (entry.direction === "across") {
         return `See ${firstLinkedClueNumber}`;
