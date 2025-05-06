@@ -24,6 +24,21 @@ test.describe("mapMyCrosswordData", () => {
     expect(mappedEntry?.humanNumber).toBe("1");
   });
 
+  test("ignores apostrophes", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      solution: "test's",
+    };
+
+    const result = mapMyCrosswordData(setUpBasicCrosswordData([entry]));
+    const mappedEntry = result.entries[0];
+
+    expect(mappedEntry?.separatorLocations).toEqual({});
+    expect(mappedEntry?.clue).toBe("Test clue (5)");
+    expect(mappedEntry?.solution).toBe("TESTS");
+    expect(mappedEntry?.length).toBe(5);
+  });
+
   test("maps entry with spaces", () => {
     const entry: MyCrosswordBasicClue = {
       ...testClue,
@@ -82,7 +97,6 @@ test.describe("mapMyCrosswordData", () => {
       position: { x: 0, y: 2 },
       group: ["1a", "2a"],
       separatorLocations: {},
-      clue: "",
       solution: "board",
     };
 
@@ -123,7 +137,6 @@ test.describe("mapMyCrosswordData", () => {
       position: { x: 2, y: 0 },
       group: ["1d", "2a"],
       separatorLocations: {},
-      clue: "",
       solution: "board",
     };
 
@@ -145,13 +158,170 @@ test.describe("mapMyCrosswordData", () => {
     expect(mappedEntryEnd?.length).toBe(5);
     expect(mappedEntryEnd?.humanNumber).toBe("2");
   });
-});
 
-// TODO other cases to test:
-// solution containing apostrophes
-// linked clues with space/hyphen between parts
-// linked clues with spaces/hyphens within parts
-// more than 2 linked entries with various separators
+  test("maps linked entries with space between parts", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+      separatorLocations: { ",": [4] },
+      solution: "test",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 0, y: 2 },
+      group: ["1a", "2a"],
+      separatorLocations: {},
+      solution: "answer",
+    };
+
+    const result = mapMyCrosswordData(
+      setUpBasicCrosswordData([entryStart, entryEnd]),
+    );
+
+    const mappedEntryStart = result.entries[0];
+    expect(mappedEntryStart?.id).toBe("1a");
+    expect(mappedEntryStart?.separatorLocations).toEqual({ ",": [4] });
+    expect(mappedEntryStart?.clue).toBe("Test clue (4,6)");
+    expect(mappedEntryStart?.solution).toBe("TEST");
+    expect(mappedEntryStart?.length).toBe(4);
+
+    const mappedEntryEnd = result.entries[1];
+    expect(mappedEntryEnd?.id).toBe("2a");
+    expect(mappedEntryEnd?.separatorLocations).toEqual({});
+    expect(mappedEntryEnd?.clue).toBe("See 1");
+    expect(mappedEntryEnd?.solution).toBe("ANSWER");
+    expect(mappedEntryEnd?.length).toBe(6);
+  });
+
+  test("maps linked entries with hyphen between parts", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+      separatorLocations: { "-": [4] },
+      solution: "test",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 0, y: 2 },
+      group: ["1a", "2a"],
+      separatorLocations: {},
+      solution: "ready",
+    };
+
+    const result = mapMyCrosswordData(
+      setUpBasicCrosswordData([entryStart, entryEnd]),
+    );
+
+    const mappedEntryStart = result.entries[0];
+    expect(mappedEntryStart?.id).toBe("1a");
+    expect(mappedEntryStart?.separatorLocations).toEqual({ "-": [4] });
+    expect(mappedEntryStart?.clue).toBe("Test clue (4-5)");
+    expect(mappedEntryStart?.solution).toBe("TEST");
+    expect(mappedEntryStart?.length).toBe(4);
+
+    const mappedEntryEnd = result.entries[1];
+    expect(mappedEntryEnd?.id).toBe("2a");
+    expect(mappedEntryEnd?.separatorLocations).toEqual({});
+    expect(mappedEntryEnd?.clue).toBe("See 1");
+    expect(mappedEntryEnd?.solution).toBe("READY");
+    expect(mappedEntryEnd?.length).toBe(5);
+  });
+
+  test("maps linked entries with separators within parts", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+      separatorLocations: { ",": [2, 5] },
+      solution: "I'm not",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 0, y: 2 },
+      group: ["1a", "2a"],
+      separatorLocations: { "-": [9] },
+      solution: "test-ready",
+    };
+
+    const result = mapMyCrosswordData(
+      setUpBasicCrosswordData([entryStart, entryEnd]),
+    );
+
+    const mappedEntryStart = result.entries[0];
+    expect(mappedEntryStart?.id).toBe("1a");
+    expect(mappedEntryStart?.separatorLocations).toEqual({ ",": [2, 5] });
+    expect(mappedEntryStart?.clue).toBe("Test clue (2,3,4-5)");
+    expect(mappedEntryStart?.solution).toBe("IMNOT");
+    expect(mappedEntryStart?.length).toBe(5);
+
+    const mappedEntryEnd = result.entries[1];
+    expect(mappedEntryEnd?.id).toBe("2a");
+    expect(mappedEntryEnd?.separatorLocations).toEqual({ "-": [9] });
+    expect(mappedEntryEnd?.clue).toBe("See 1");
+    expect(mappedEntryEnd?.solution).toBe("TESTREADY");
+    expect(mappedEntryEnd?.length).toBe(9);
+  });
+
+  // TODO: It would make ore sense to specify all separators on the first entry
+  test("maps multiple linked entries", () => {
+    const entry1: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a", "3a", "4a"],
+      separatorLocations: { ",": [2] },
+      solution: "I'm",
+    };
+    const entry2: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 0, y: 2 },
+      group: ["1a", "2a", "3a", "4a"],
+      separatorLocations: { ",": [5] },
+      solution: "not",
+    };
+    const entry3: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 3,
+      position: { x: 0, y: 4 },
+      group: ["1a", "2a", "3a", "4a"],
+      separatorLocations: { "-": [9] },
+      solution: "test",
+    };
+    const entry4: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 4,
+      position: { x: 0, y: 6 },
+      group: ["1a", "2a", "3a", "4a"],
+      separatorLocations: {},
+      solution: "ready",
+    };
+
+    const result = mapMyCrosswordData(
+      setUpBasicCrosswordData([entry1, entry2, entry3, entry4]),
+    );
+
+    const mappedEntry1 = result.entries[0];
+    expect(mappedEntry1?.clue).toBe("Test clue (2,3,4-5)");
+    expect(mappedEntry1?.solution).toBe("IM");
+    expect(mappedEntry1?.length).toBe(2);
+
+    const mappedEntry2 = result.entries[1];
+    expect(mappedEntry2?.clue).toBe("See 1");
+    expect(mappedEntry2?.solution).toBe("NOT");
+    expect(mappedEntry2?.length).toBe(3);
+
+    const mappedEntry3 = result.entries[2];
+    expect(mappedEntry3?.clue).toBe("See 1");
+    expect(mappedEntry3?.solution).toBe("TEST");
+    expect(mappedEntry3?.length).toBe(4);
+
+    const mappedEntry4 = result.entries[3];
+    expect(mappedEntry4?.clue).toBe("See 1");
+    expect(mappedEntry4?.solution).toBe("READY");
+    expect(mappedEntry4?.length).toBe(5);
+  });
+});
 
 const testClue: MyCrosswordBasicClue = {
   number: 1,
