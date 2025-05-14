@@ -3,7 +3,71 @@ import {
   MyCrosswordBasicClue,
   MyCrosswordBasicData,
 } from "~/app/puzzle/[id]/crossword/crossword.type";
-import { mapMyCrosswordData } from "~/helpers/crossword-helpers";
+import {
+  getId,
+  mapMyCrosswordData,
+  getNormalisedSolution,
+  getNormalisedClue,
+} from "~/helpers/crossword-helpers";
+
+test.describe("getId", () => {
+  test("returns correct ID for across entry", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 4,
+      direction: "across",
+    };
+
+    expect(getId(entry)).toBe("4a");
+  });
+
+  test("returns correct ID for down entry", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 14,
+      direction: "down",
+    };
+
+    expect(getId(entry)).toBe("14d");
+  });
+});
+
+test.describe("getNormalisedSolution", () => {
+  test("removes punctuation and converts to upper case", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      solution: "I'm not test-ready",
+    };
+
+    expect(getNormalisedSolution(entry)).toBe("IMNOTTESTREADY");
+  });
+});
+
+test.describe("getNormalisedClue", () => {
+  test("returns clue and length for single entry", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      clue: "Test clue",
+      solution: "test",
+    };
+
+    const result = getNormalisedClue(entry, "1a", [entry]);
+    expect(result).toBe("Test clue (4)");
+  });
+
+  test("returns clue and length for single entry with separators", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      clue: "Test clue",
+      solution: "I'm not test-ready",
+    };
+
+    const result = getNormalisedClue(entry, "1a", [entry]);
+    expect(result).toBe("Test clue (2,3,4-5)");
+  });
+
+  // TODO Add tests for linked entries
+});
 
 test.describe("mapMyCrosswordData", () => {
   test("maps simple entry", () => {

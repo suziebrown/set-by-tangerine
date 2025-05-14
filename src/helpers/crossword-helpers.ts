@@ -47,13 +47,13 @@ const mapCrosswordEntry = (
 };
 
 // TODO Add tests for the lower-level helper functions too
-const getId = (entry: MyCrosswordBasicClue): string =>
+export const getId = (entry: MyCrosswordBasicClue): string =>
   entry.number.toString() + (entry.direction === "across" ? "a" : "d");
 
-const getNormalisedSolution = (entry: MyCrosswordBasicClue): string =>
+export const getNormalisedSolution = (entry: MyCrosswordBasicClue): string =>
   entry.solution.toUpperCase().replaceAll(/\s|-|'/g, "");
 
-const getNormalisedClue = (
+export const getNormalisedClue = (
   entry: MyCrosswordBasicClue,
   id: string,
   allEntries: MyCrosswordBasicClue[],
