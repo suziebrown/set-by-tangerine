@@ -9,6 +9,7 @@ export type MyCrosswordBasicClue = Omit<
   separatorLocations?: SeparatorLocationsOptional;
   group?: string[];
   humanNumber?: string;
+  explanation?: string;
 };
 
 export type MyCrosswordBasicData = Omit<
