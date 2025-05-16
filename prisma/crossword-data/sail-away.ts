@@ -51,6 +51,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 4 },
       solution: "runcible spoon",
       clue: "Prison club one disrupted (8,5)",
+      clueWithDefinitionUnderlined: "Prison club one disrupted (8,5)",
       explanation: "[Theme word] Anagram (disrupted) of PRISON CLUB ONE",
     },
     {
@@ -59,6 +60,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 6 },
       solution: "guitar",
       clue: "Graphical user interface with trash",
+      clueWithDefinitionUnderlined: "Graphical user interface with trash",
       explanation: "[Theme word] GUI (graphical user interface) + TAR (trash)",
     },
     {
@@ -67,6 +69,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 7, y: 6 },
       solution: "mess room",
       clue: "Sounds like the cat takes special space in dining hall",
+      clueWithDefinitionUnderlined:
+        "Sounds like the cat takes special space in <u>dining hall</u>",
       explanation:
         "[W] MEWS (sounds like the cat) + S (special) + ROOM (space)",
     },
@@ -76,6 +80,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 8 },
       solution: "timeline",
       clue: "Order of events is up to compiler to file",
+      clueWithDefinitionUnderlined:
+        "<u>Order of events</u> is up to compiler to file",
       explanation: "[L] TIL (up to = until) + ME (compiler) + LINE (file)",
     },
     {
@@ -84,6 +90,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 9, y: 8 },
       solution: "CRYPTO",
       clue: "Coy prat circulating Bitcoin?",
+      clueWithDefinitionUnderlined: "Coy prat circulating <u>Bitcoin?</u>",
       explanation: "[A] Anagram (circulating) of COY PRAT",
     },
     {
@@ -92,6 +99,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 2, y: 10 },
       solution: "five-pound note",
       clue: "Famous group with hit record",
+      clueWithDefinitionUnderlined: "Famous group with hit record",
       explanation:
         "[Theme word] FIVE (famous group - The Famous Five) + POUND (hit) + NOTE (record)",
     },
@@ -101,6 +109,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 12 },
       solution: "narration",
       clue: 'Voiceover: "sodium, right now, has restricted supply"',
+      clueWithDefinitionUnderlined:
+        '<u>Voiceover</u>: "sodium, right now, has restricted supply"',
       explanation:
         "[N] NA (sodium) + RN (right now) + RATION (restricted supply)",
     },
@@ -110,6 +120,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 10, y: 12 },
       solution: "greed",
       clue: "Love of money - it's the root of evil, being absorbed by empty god - only half spared",
+      clueWithDefinitionUnderlined:
+        "<u>Love of money</u> - it's the root of evil, being absorbed by empty god - only half spared",
       explanation:
         "[D] First letter (root) of Evil inside (being absorbed by) outside letters (empty) of GoD + half of spaRED",
     },
@@ -119,6 +131,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 14 },
       solution: "epitaph",
       clue: "Words about one late coming out of the pit at Philadelphia",
+      clueWithDefinitionUnderlined:
+        "<u>Words about one late</u> coming out of the pit at Philadelphia",
       explanation: "[T] Hidden in (coming out of) thE PIT AT PHiladelphia",
     },
     {
@@ -127,6 +141,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 8, y: 14 },
       solution: "empathy",
       clue: "Turn up with old man, your old feeling the same",
+      clueWithDefinitionUnderlined:
+        "Turn up with old man, your old <u>feeling the same</u>",
       explanation: "[H] HEM (turn up) + PA (old man) + THY (your old)",
     },
     {
@@ -135,6 +151,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 0 },
       solution: "nose rag",
       clue: "Bristle going under butt in hanky (4,3)",
+      clueWithDefinitionUnderlined:
+        "Bristle going under butt in <u>hanky</u> (4,3)",
       explanation: "[E] RAGE (bristle) under NOSE (butt in)",
     },
     {
@@ -143,6 +161,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 2, y: 0 },
       solution: "chianti",
       clue: "Red Cross helps international aid NGOs to provide items initially (7)",
+      clueWithDefinitionUnderlined:
+        "<u>Red</u> Cross helps international aid NGOs to provide items initially (7)",
       explanation:
         "[P] First letters (initially) of Cross Helps International Aid Ngos To Provide Items",
     },
@@ -152,6 +172,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 4, y: 0 },
       solution: "tutti",
       clue: "Ballet skirt? Bring it back for all performers (5)",
+      clueWithDefinitionUnderlined:
+        "Ballet skirt? Bring it back for <u>all performers</u> (5)",
       explanation: "[U] TUTU (ballet skirt) + reversal (bring ... back) of IT",
     },
     {
@@ -160,6 +182,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 6, y: 0 },
       solution: "exhale",
       clue: "Let out wind with sound, following coitus (6)",
+      clueWithDefinitionUnderlined:
+        "<u>Let out wind</u> with sound, following coitus (6)",
       explanation:
         "[S] HALE (sound = in good health) after (following) SEX (coitus)",
     },
@@ -169,6 +193,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 8, y: 0 },
       solution: "SINISTER",
       clue: "Left for Rome, where sibling holds positions of influence (8)",
+      clueWithDefinitionUnderlined:
+        "<u>Left for Rome</u>, where sibling holds positions of influence (8)",
       explanation:
         "[S] SISTER (sibling) around (holds) INS (position of influence)",
     },
@@ -178,6 +204,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 12, y: 0 },
       solution: "ACORN",
       clue: "Nut throwing crayon (5)",
+      clueWithDefinitionUnderlined: "<u>Nut</u> throwing crayon (5)",
       explanation: "[Y] Anagram (throwing) of CRAYON",
     },
     {
@@ -186,6 +213,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 14, y: 0 },
       solution: "HONEY",
       clue: "Perfect year (5)",
+      clueWithDefinitionUnderlined: "Perfect year (5)",
       explanation: "[Theme word] HONE (perfect) + Y (year)",
     },
     {
@@ -194,6 +222,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 10, y: 2 },
       solution: "SPONSOR",
       clue: "Ship carrying pony - not quite getting my support financially (7)",
+      clueWithDefinitionUnderlined:
+        "Ship carrying pony - not quite getting my <u>support financially</u> (7)",
       explanation:
         "[C] SS (ship) around (carrying) PONy missing last letter (not quite) + COR (my)",
     },
@@ -203,6 +233,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 13, y: 5 },
       solution: "BOAT",
       clue: "Oddly buoyant (4)",
+      clueWithDefinitionUnderlined: "Oddly buoyant (4)",
       explanation: "[Theme word] Odd letters of (oddly) BuOyAnT",
     },
     {
@@ -211,6 +242,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 1, y: 6 },
       solution: "UNIT",
       clue: "Squad cycling at university (4)",
+      clueWithDefinitionUnderlined: "<u>Squad</u> cycling at university (4)",
       explanation: "[A] AT UNI (at university) cycling AT to the end",
     },
     {
@@ -219,6 +251,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 4, y: 6 },
       solution: "ALLUVIA",
       clue: "River deposits everything, you heard, with time passing by (7)",
+      clueWithDefinitionUnderlined:
+        "<u>River deposits</u> everything, you heard, with time passing by (7)",
       explanation:
         "[T] ALL (everything) + U (you heard) + T (time) + VIA (passing by)",
     },
@@ -228,6 +262,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 6, y: 7 },
       solution: "SNAPPISH",
       clue: "Severus's expression of disdain showing irritability (8)",
+      clueWithDefinitionUnderlined:
+        "Severus's expression of disdain <u>showing irritability</u> (8)",
       explanation: "[E] SNAPE (Severus) + PISH (expression of disdain)",
     },
     {
@@ -236,6 +272,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 12, y: 8 },
       solution: "PROJECT",
       clue: "With mobile network dropping out, kick out commoner before producing forecast (7)",
+      clueWithDefinitionUnderlined:
+        "With mobile network dropping out, kick out commoner before producing <u>forecast</u> (7)",
       explanation:
         "[L] PROLE (commoner) before EJECT (kick out), minus (with ... dropping out) EE (mobile network)",
     },
@@ -245,6 +283,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 14, y: 8 },
       solution: "open day",
       clue: "When anyone can have a look around, work has to stop, yes (4,3)",
+      clueWithDefinitionUnderlined:
+        "<u>When anyone can have a look around</u>, work has to stop, yes (4,3)",
       explanation: "[E] OP (work) + END (to stop) + AYE (yes)",
     },
     {
@@ -253,6 +293,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 8, y: 9 },
       solution: "QUINCE",
       clue: "Starts to question understanding: is Norway considered European? (6)",
+      clueWithDefinitionUnderlined:
+        "Starts to question understanding: is Norway considered European? (6)",
       explanation:
         "[Theme word] First letters of (starts to) Question Understanding Is Norway Considered European",
     },
@@ -262,6 +304,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 0, y: 10 },
       solution: "MINCE",
       clue: "Cinema struggling, having lost core of finance (5)",
+      clueWithDefinitionUnderlined:
+        "Cinema struggling, having lost core of finance (5)",
       explanation:
         "[Theme word] Anagram (struggling) of CINEMA minus (having lost) middle letter (core) of finAnce",
     },
@@ -271,6 +315,8 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 2, y: 10 },
       solution: "FARSI",
       clue: "Language from afar - a Sinitic fragment (5)",
+      clueWithDefinitionUnderlined:
+        "<u>Language</u> from afar - a Sinitic fragment (5)",
       explanation: "[A] Hidden (fragment) in aFAR A SInitic",
     },
     {
@@ -279,6 +325,7 @@ export const insiders: MyCrosswordBasicData = {
       position: { x: 10, y: 10 },
       solution: "dig up",
       clue: "Dutch cobble together mine (3,2)",
+      clueWithDefinitionUnderlined: "Dutch cobble together <u>mine</u> (3,2)",
       explanation: "[R] D (Dutch) + RIG UP (cobble together)",
     },
   ],
