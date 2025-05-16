@@ -152,16 +152,12 @@ const getLinkedNormalisedSolution = (
   entry: Readonly<MyCrosswordBasicClue>,
   allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): string => {
-  if (!entry.group || entry.group.length === 1) {
+  if (!isPartOfLinkedEntries(entry)) {
     return getNormalisedSolution(entry);
   }
 
-  const linkedSolutions = entry.group.map((id) => {
-    const linkedEntry = allEntries.find((entry) => getId(entry) === id);
-
-    if (!linkedEntry) {
-      throw new Error(`Linked entry with id ${id} not found`);
-    }
+  const linkedSolutions = entry.group!.map((id) => {
+    const linkedEntry = getLinkedEntryById(id, allEntries);
 
     return getNormalisedSolution(linkedEntry);
   });
@@ -216,7 +212,7 @@ const getHumanWordLengths = (
   id: string,
   allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): string => {
-  if (entry.group && entry.group.length > 1 && entry.group[0] !== id) {
+  if (isPartOfLinkedEntries(entry) && !isFirstPartOfLinkedEntries(entry, id)) {
     return "";
   }
 
