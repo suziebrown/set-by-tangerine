@@ -10,6 +10,7 @@ export type MyCrosswordBasicClue = Omit<
   group?: string[];
   humanNumber?: string;
   explanation?: string;
+  clueWithDefinitionUnderlined?: string;
 };
 
 export type MyCrosswordBasicData = Omit<
