@@ -134,26 +134,15 @@ export const getNormalisedClue = (
   id: string,
   allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): string => {
-  if (entry.group && entry.group.length > 1 && entry.group[0] !== id) {
-    const firstLinkedClue = entry.group[0]!;
-    const firstLinkedClueNumber = firstLinkedClue.slice(0, -1);
+  if (isPartOfLinkedEntries(entry) && !isFirstPartOfLinkedEntries(entry, id)) {
+    const firstLinkedClueId = entry.group![0]!;
+    const firstLinkedClue = getLinkedEntryById(firstLinkedClueId, allEntries);
 
-    // TODO look up the actual linked clue from allEntries
-    if (firstLinkedClue.endsWith("a")) {
-      if (entry.direction === "across") {
-        return `See ${firstLinkedClueNumber}`;
-      }
-      return `See ${firstLinkedClueNumber} across`;
-    } else if (firstLinkedClue.endsWith("d")) {
-      if (entry.direction === "down") {
-        return `See ${firstLinkedClueNumber}`;
-      }
-      return `See ${firstLinkedClueNumber} down`;
+    if (firstLinkedClue.direction === entry.direction) {
+      return "See " + firstLinkedClue.number;
     }
 
-    throw new Error(
-      `Error in clue '${id}': Couldn't establish direction of first linked clue.`,
-    );
+    return "See " + firstLinkedClue.number + " " + firstLinkedClue.direction;
   }
 
   return entry.clue + " (" + getHumanWordLengths(entry, id, allEntries) + ")";
