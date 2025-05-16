@@ -56,7 +56,7 @@ export const getId = (entry: MyCrosswordBasicClue): string =>
 export const getNormalisedSolution = (entry: MyCrosswordBasicClue): string =>
   entry.solution.toUpperCase().replaceAll(/\s|-|'/g, "");
 
-const getHumanNumber = (
+export const getHumanNumber = (
   entry: Readonly<MyCrosswordBasicClue>,
   id: string,
   allEntries: ReadonlyArray<MyCrosswordBasicClue>,

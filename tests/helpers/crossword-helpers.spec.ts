@@ -10,6 +10,7 @@ import {
   getNormalisedClue,
   isPartOfLinkedEntries,
   isFirstPartOfLinkedEntries,
+  getHumanNumber,
 } from "~/helpers/crossword-helpers";
 
 test.describe("getId", () => {
@@ -127,6 +128,72 @@ test.describe("isFirstPartOfLinkedEntries", () => {
     };
 
     expect(isFirstPartOfLinkedEntries(entry, "1a")).toBe(false);
+  });
+});
+
+test.describe("getHumanNumber", () => {
+  test("returns number for standalone clue", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 18,
+      direction: "across",
+    };
+
+    expect(getHumanNumber(entry, "18a", [entry])).toBe("18");
+  });
+
+  test("returns own number for non-leading part of linked entries", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 18,
+      direction: "across",
+      group: ["1a", "1d", "18a"],
+    };
+
+    expect(getHumanNumber(entry, "18a", [entry])).toBe("18");
+  });
+
+  test("returns list of numbers for leading part of linked across entries", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 18,
+      direction: "across",
+      group: ["18a", "1a"],
+    };
+
+    const linkedEntry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 1,
+      direction: "across",
+      group: ["18a", "1a"],
+    };
+
+    expect(getHumanNumber(entry, "18a", [linkedEntry, entry])).toBe("18, 1");
+  });
+
+  test("includes direction for linked entry in other direction", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 18,
+      direction: "across",
+      group: ["18a", "1d", "1a"],
+    };
+
+    const linkedAcrossEntry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 1,
+      direction: "across",
+    };
+
+    const linkedDownEntry: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 1,
+      direction: "down",
+    };
+
+    expect(
+      getHumanNumber(entry, "18a", [linkedAcrossEntry, linkedDownEntry, entry]),
+    ).toBe("18, 1 down, 1");
   });
 });
 
