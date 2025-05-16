@@ -220,7 +220,66 @@ test.describe("getNormalisedClue", () => {
     expect(result).toBe("Test clue (2,3,4-5)");
   });
 
-  // TODO Add tests for linked entries
+  test("returns cross-reference without length for non-leading linked entry in the same direction", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+      separatorLocations: {},
+      solution: "cup",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 0, y: 2 },
+      group: ["1a", "2a"],
+      separatorLocations: {},
+      solution: "board",
+    };
+
+    const result = getNormalisedClue(entryEnd, "2a", [entryStart, entryEnd]);
+    expect(result).toBe("See 1");
+  });
+
+  test("returns cross-reference without length for non-leading linked entry in the other direction", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2d"],
+      separatorLocations: {},
+      solution: "cup",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      direction: "down",
+      position: { x: 0, y: 2 },
+      group: ["1a", "2d"],
+      separatorLocations: {},
+      solution: "board",
+    };
+
+    const result = getNormalisedClue(entryEnd, "2d", [entryStart, entryEnd]);
+    expect(result).toBe("See 1 across");
+  });
+
+  test("returns clue with whole length for leading linked entry", () => {
+    const entryStart: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+      separatorLocations: {},
+      solution: "cup",
+    };
+    const entryEnd: MyCrosswordBasicClue = {
+      ...testClue,
+      number: 2,
+      position: { x: 0, y: 2 },
+      group: ["1a", "2a"],
+      separatorLocations: {},
+      solution: "board",
+    };
+
+    const result = getNormalisedClue(entryStart, "1a", [entryStart, entryEnd]);
+    expect(result).toBe("Test clue (8)");
+  });
 });
 
 test.describe("mapMyCrosswordData", () => {
