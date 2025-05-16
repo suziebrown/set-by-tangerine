@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
 import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
+import { sailAway } from "./crossword-data/sail-away";
 
 const prisma = new PrismaClient();
 
@@ -74,6 +75,28 @@ async function seedData(): Promise<void> {
       },
       crossword: {
         create: { instructions: null, data: JSON.stringify(partingGift) },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  const sailAwayPuzzle = await prisma.puzzle.create({
+    data: {
+      title: "Sail Away",
+      setBy: "Tangerine",
+      publishedAt: new Date(2025, 4, 15, 17, 0, 0),
+      firstPublishedAt: new Date(2025, 4, 15, 17, 0, 0),
+      downloadUrl: "sail-away.pdf",
+      imageUrl: "insiders_grid.png",
+      tags: {
+        connect: [{ label: "crossword" }, { label: "cryptic" }],
+      },
+      crossword: {
+        create: {
+          instructions:
+            "The wordplay in twenty-five clues indicates a superfluous letter. These letters, in clue order, give a thematic work. The remaining entries (not otherwise defined) are involved in the thematic journey.",
+          data: JSON.stringify(sailAway),
+        },
       },
     },
     include: { crossword: true },

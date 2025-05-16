@@ -8,6 +8,8 @@ export type MyCrosswordBasicClue = Omit<
   solution: string;
   separatorLocations?: SeparatorLocationsOptional;
   group?: string[];
+  explanation?: string;
+  clueWithDefinitionUnderlined?: string;
 };
 
 export type MyCrosswordBasicData = Omit<
