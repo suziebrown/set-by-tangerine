@@ -1,6 +1,6 @@
 import { MyCrosswordBasicData } from "~/app/puzzle/[id]/crossword/crossword.type";
 
-export const insiders: MyCrosswordBasicData = {
+export const sailAway: MyCrosswordBasicData = {
   dimensions: {
     cols: 15,
     rows: 15,
