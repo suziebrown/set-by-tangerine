@@ -8,6 +8,8 @@ import {
   mapMyCrosswordData,
   getNormalisedSolution,
   getNormalisedClue,
+  isPartOfLinkedEntries,
+  isFirstPartOfLinkedEntries,
 } from "~/helpers/crossword-helpers";
 
 test.describe("getId", () => {
@@ -40,6 +42,91 @@ test.describe("getNormalisedSolution", () => {
     };
 
     expect(getNormalisedSolution(entry)).toBe("IMNOTTESTREADY");
+  });
+});
+
+test.describe("isPartOfLinkedEntries", () => {
+  test("returns false if group is not specified", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: undefined,
+    };
+
+    expect(isPartOfLinkedEntries(entry)).toBe(false);
+  });
+
+  test("returns false if group is empty", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: [],
+    };
+
+    expect(isPartOfLinkedEntries(entry)).toBe(false);
+  });
+
+  test("returns false if group has one element", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a"],
+    };
+
+    expect(isPartOfLinkedEntries(entry)).toBe(false);
+  });
+
+  test("returns true if group has multiple elements", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+    };
+
+    expect(isPartOfLinkedEntries(entry)).toBe(true);
+  });
+});
+
+test.describe("isFirstPartOfLinkedEntries", () => {
+  test("returns false if group is not specified", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: undefined,
+    };
+
+    expect(isFirstPartOfLinkedEntries(entry, "1a")).toBe(false);
+  });
+
+  test("returns false if group is empty", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: [],
+    };
+
+    expect(isFirstPartOfLinkedEntries(entry, "1a")).toBe(false);
+  });
+
+  test("returns false if group has one element", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a"],
+    };
+
+    expect(isFirstPartOfLinkedEntries(entry, "1a")).toBe(false);
+  });
+
+  test("returns true if entry is first in group", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["1a", "2a"],
+    };
+
+    expect(isFirstPartOfLinkedEntries(entry, "1a")).toBe(true);
+  });
+
+  test("returns true if entry is not first in group", () => {
+    const entry: MyCrosswordBasicClue = {
+      ...testClue,
+      group: ["2a", "1a"],
+    };
+
+    expect(isFirstPartOfLinkedEntries(entry, "1a")).toBe(false);
   });
 });
 
@@ -175,7 +262,7 @@ test.describe("mapMyCrosswordData", () => {
     expect(mappedEntryStart?.solution).toBe("CUP");
     expect(mappedEntryStart?.length).toBe(3);
     expect(mappedEntryStart?.group).toEqual(["1a", "2a"]);
-    expect(mappedEntryStart?.humanNumber).toBe("1");
+    expect(mappedEntryStart?.humanNumber).toBe("1, 2");
 
     const mappedEntryEnd = result.entries[1];
     expect(mappedEntryEnd?.id).toBe("2a");
@@ -213,7 +300,7 @@ test.describe("mapMyCrosswordData", () => {
     expect(mappedEntryStart?.clue).toBe("Test clue (8)");
     expect(mappedEntryStart?.solution).toBe("CUP");
     expect(mappedEntryStart?.length).toBe(3);
-    expect(mappedEntryStart?.humanNumber).toBe("1");
+    expect(mappedEntryStart?.humanNumber).toBe("1, 2 across");
 
     const mappedEntryEnd = result.entries[1];
     expect(mappedEntryEnd?.id).toBe("2a");

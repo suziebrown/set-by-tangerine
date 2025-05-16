@@ -77,7 +77,7 @@ const getHumanNumber = (
     const linkedEntryHumanNumber =
       linkedEntry.direction === entry.direction
         ? linkedEntry.number.toString()
-        : linkedEntry.number + linkedEntry.direction;
+        : linkedEntry.number + " " + linkedEntry.direction;
 
     allLinkedNumbers.push(linkedEntryHumanNumber);
   });
@@ -85,10 +85,10 @@ const getHumanNumber = (
   return allLinkedNumbers.join(", ");
 };
 
-const isPartOfLinkedEntries = (entry: MyCrosswordBasicClue): boolean =>
+export const isPartOfLinkedEntries = (entry: MyCrosswordBasicClue): boolean =>
   entry.group != undefined && entry.group.length > 1;
 
-const isFirstPartOfLinkedEntries = (
+export const isFirstPartOfLinkedEntries = (
   entry: Readonly<MyCrosswordBasicClue>,
   id: string,
 ): boolean => isPartOfLinkedEntries(entry) && entry.group![0] === id;
