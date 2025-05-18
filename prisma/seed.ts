@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-
 import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
 import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";

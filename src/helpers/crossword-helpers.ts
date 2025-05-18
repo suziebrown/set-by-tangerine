@@ -1,5 +1,8 @@
 import { type JsonValue } from "@prisma/client/runtime/library";
-import { type SeparatorLocationsOptional } from "node_modules/mycrossword/dist/types";
+import {
+  type Direction,
+  type SeparatorLocationsOptional,
+} from "node_modules/mycrossword/dist/types";
 import {
   type MyCrosswordClue,
   type MyCrosswordBasicClue,
@@ -7,7 +10,7 @@ import {
   type MyCrosswordData,
 } from "../app/puzzle/[id]/crossword/crossword.type";
 
-// QQ Add tests for the top-level function too
+// TODO Add tests for the top-level function too
 export const parseCrosswordDataJson = (
   json?: JsonValue,
 ): MyCrosswordData | null => {
@@ -42,61 +45,119 @@ const mapCrosswordEntry = (
     solution: normalisedSolution,
     length: normalisedSolution.length,
     group: entry.group ?? [id],
-    humanNumber: entry.humanNumber ?? entry.number.toString(),
+    humanNumber: getHumanNumber(entry, id, allEntries),
   };
 };
 
 // TODO Add tests for the lower-level helper functions too
-const getId = (entry: MyCrosswordBasicClue): string =>
+export const getId = (entry: MyCrosswordBasicClue): string =>
   entry.number.toString() + (entry.direction === "across" ? "a" : "d");
 
-const getNormalisedSolution = (entry: MyCrosswordBasicClue): string =>
+export const getNormalisedSolution = (entry: MyCrosswordBasicClue): string =>
   entry.solution.toUpperCase().replaceAll(/\s|-|'/g, "");
 
-const getNormalisedClue = (
-  entry: MyCrosswordBasicClue,
+export const getHumanNumber = (
+  entry: Readonly<MyCrosswordBasicClue>,
   id: string,
-  allEntries: MyCrosswordBasicClue[],
+  allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): string => {
-  if (entry.group && entry.group.length > 1 && entry.group[0] !== id) {
-    const firstLinkedClue = entry.group[0]!;
-    const firstLinkedClueNumber = firstLinkedClue.slice(0, -1);
+  if (!isPartOfLinkedEntries(entry)) {
+    return entry.number.toString();
+  }
 
-    // TODO look up the actual linked clue from allEntries
-    if (firstLinkedClue.endsWith("a")) {
-      if (entry.direction === "across") {
-        return `See ${firstLinkedClueNumber}`;
-      }
-      return `See ${firstLinkedClueNumber} across`;
-    } else if (firstLinkedClue.endsWith("d")) {
-      if (entry.direction === "down") {
-        return `See ${firstLinkedClueNumber}`;
-      }
-      return `See ${firstLinkedClueNumber} down`;
+  if (!isFirstPartOfLinkedEntries(entry, id)) {
+    return entry.number.toString();
+  }
+
+  const allLinkedNumbers: Array<string> = [];
+
+  entry.group!.forEach((linkedEntryId) => {
+    const linkedEntry = getLinkedEntryById(linkedEntryId, allEntries);
+
+    const linkedEntryHumanNumber =
+      linkedEntry.direction === entry.direction
+        ? linkedEntry.number.toString()
+        : linkedEntry.number + " " + linkedEntry.direction;
+
+    allLinkedNumbers.push(linkedEntryHumanNumber);
+  });
+
+  return allLinkedNumbers.join(", ");
+};
+
+export const isPartOfLinkedEntries = (entry: MyCrosswordBasicClue): boolean =>
+  entry.group != undefined && entry.group.length > 1;
+
+export const isFirstPartOfLinkedEntries = (
+  entry: Readonly<MyCrosswordBasicClue>,
+  id: string,
+): boolean => isPartOfLinkedEntries(entry) && entry.group![0] === id;
+
+const getLinkedEntryById = (
+  id: string,
+  allEntries: ReadonlyArray<MyCrosswordBasicClue>,
+): MyCrosswordBasicClue => {
+  let direction: Direction;
+
+  switch (id.slice(-1)) {
+    case "a": {
+      direction = "across";
+      break;
+    }
+    case "d": {
+      direction = "down";
+      break;
+    }
+    default:
+      throw new Error(
+        `Error finding linked clue '${id}': couldn't establish direction`,
+      );
+  }
+
+  const number = parseInt(id.slice(0, -1));
+
+  const matchedEntry = allEntries.find(
+    (entry) => entry.number === number && entry.direction === direction,
+  );
+
+  if (matchedEntry == undefined) {
+    throw new Error(
+      `Error finding linked clue '${id}': no clue exists with number '${number}' and direction '${direction}'`,
+    );
+  }
+
+  return matchedEntry;
+};
+
+export const getNormalisedClue = (
+  entry: Readonly<MyCrosswordBasicClue>,
+  id: string,
+  allEntries: ReadonlyArray<MyCrosswordBasicClue>,
+): string => {
+  if (isPartOfLinkedEntries(entry) && !isFirstPartOfLinkedEntries(entry, id)) {
+    const firstLinkedClueId = entry.group![0]!;
+    const firstLinkedClue = getLinkedEntryById(firstLinkedClueId, allEntries);
+
+    if (firstLinkedClue.direction === entry.direction) {
+      return "See " + firstLinkedClue.number;
     }
 
-    throw new Error(
-      `Error in clue '${id}': Couldn't establish direction of first linked clue.`,
-    );
+    return "See " + firstLinkedClue.number + " " + firstLinkedClue.direction;
   }
 
   return entry.clue + " (" + getHumanWordLengths(entry, id, allEntries) + ")";
 };
 
 const getLinkedNormalisedSolution = (
-  entry: MyCrosswordBasicClue,
-  allEntries: MyCrosswordBasicClue[],
+  entry: Readonly<MyCrosswordBasicClue>,
+  allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): string => {
-  if (!entry.group || entry.group.length === 1) {
+  if (!isPartOfLinkedEntries(entry)) {
     return getNormalisedSolution(entry);
   }
 
-  const linkedSolutions = entry.group.map((id) => {
-    const linkedEntry = allEntries.find((entry) => getId(entry) === id);
-
-    if (!linkedEntry) {
-      throw new Error(`Linked entry with id ${id} not found`);
-    }
+  const linkedSolutions = entry.group!.map((id) => {
+    const linkedEntry = getLinkedEntryById(id, allEntries);
 
     return getNormalisedSolution(linkedEntry);
   });
@@ -147,11 +208,11 @@ const getLinkedSeparators = (
 };
 
 const getHumanWordLengths = (
-  entry: MyCrosswordBasicClue,
+  entry: Readonly<MyCrosswordBasicClue>,
   id: string,
-  allEntries: MyCrosswordBasicClue[],
+  allEntries: ReadonlyArray<MyCrosswordBasicClue>,
 ): string => {
-  if (entry.group && entry.group.length > 1 && entry.group[0] !== id) {
+  if (isPartOfLinkedEntries(entry) && !isFirstPartOfLinkedEntries(entry, id)) {
     return "";
   }
 

@@ -8,7 +8,6 @@ export type MyCrosswordBasicClue = Omit<
   solution: string;
   separatorLocations?: SeparatorLocationsOptional;
   group?: string[];
-  humanNumber?: string;
   explanation?: string;
   clueWithDefinitionUnderlined?: string;
 };
