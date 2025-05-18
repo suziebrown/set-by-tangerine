@@ -20,7 +20,7 @@ async function seedData(): Promise<void> {
   await prisma.tag.create({ data: { label: "crossword" } });
   await prisma.tag.create({ data: { label: "cryptic" } });
 
-  const insidersPuzzle = await prisma.puzzle.create({
+  await prisma.puzzle.create({
     data: {
       title: "Insiders",
       setBy: "Tangerine",
@@ -44,7 +44,7 @@ async function seedData(): Promise<void> {
     include: { crossword: true },
   });
 
-  const helloMyNameIsPuzzle = await prisma.puzzle.create({
+  await prisma.puzzle.create({
     data: {
       title: "Hello My Name Is",
       setBy: "Tangerine",
@@ -63,7 +63,7 @@ async function seedData(): Promise<void> {
     include: { crossword: true },
   });
 
-  const partingGiftPuzzle = await prisma.puzzle.create({
+  await prisma.puzzle.create({
     data: {
       title: "Parting Gift",
       setBy: "Tangerine",
@@ -83,7 +83,7 @@ async function seedData(): Promise<void> {
     include: { crossword: true },
   });
 
-  const sailAwayPuzzle = await prisma.puzzle.create({
+  await prisma.puzzle.create({
     data: {
       title: "Sail Away",
       setBy: "Tangerine",
