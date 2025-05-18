@@ -1,8 +1,8 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import { BasePage } from "../base.pom";
 
 export class BrowsePage extends BasePage {
-  readonly url = "browse";
+  readonly url = "";
 
   constructor(page: Page) {
     super(page);

@@ -1,4 +1,4 @@
-import { MyCrosswordBasicData } from "~/app/puzzle/[id]/crossword/crossword.type";
+import { type MyCrosswordBasicData } from "~/app/puzzle/[id]/crossword/crossword.type";
 
 export const sailAway: MyCrosswordBasicData = {
   dimensions: {
