@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
 import {
-  MyCrosswordBasicClue,
-  MyCrosswordBasicData,
+  type MyCrosswordBasicClue,
+  type MyCrosswordBasicData,
 } from "~/app/puzzle/[id]/crossword/crossword.type";
 import {
   getId,
