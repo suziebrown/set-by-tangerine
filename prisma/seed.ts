@@ -18,8 +18,18 @@ async function clearDatabase(): Promise<void> {
 async function seedData(): Promise<void> {
   console.log("Seeding static data into database...");
 
-  await prisma.tag.create({ data: { label: "crossword" } });
-  await prisma.tag.create({ data: { label: "cryptic" } });
+  console.log("Seeding tags...");
+
+  await prisma.tag.createMany({
+    data: [
+      { label: "crossword" },
+      { label: "cryptic" },
+      { label: "quick" },
+      { label: "jumbo" },
+    ],
+  });
+
+  console.log("Seeding puzzles...");
 
   await prisma.puzzle.create({
     data: {
