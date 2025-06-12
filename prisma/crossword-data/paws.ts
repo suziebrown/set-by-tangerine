@@ -400,9 +400,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 22, y: 1 },
       solution: "tendonitis",
-      clue: "Nurse at work: it's a sports injury",
+      clue: 'Nurse at work: "it\'s a sports injury"',
       clueWithDefinitionUnderlined:
-        "Nurse at work: it's <u>a sports injury</u>",
+        'Nurse at work: "it\'s <u>a sports injury</u>"',
       explanation: "TEND (nurse) + ON (at work) + IT IS (it's)",
     },
     {
@@ -410,8 +410,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 7, y: 4 },
       solution: "ash",
-      clue: "A tree or its remains",
-      clueWithDefinitionUnderlined: "<u>A tree</u> or <u>its remains</u>",
+      clue: "A tree, or the remains of one",
+      clueWithDefinitionUnderlined:
+        "<u>A tree</u>, or <u>the remains of one/u>",
       explanation: "Double definition",
     },
     {
@@ -650,9 +651,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 18, y: 16 },
       solution: "bonanza",
-      clue: "Book on a New Zealand adventure - intially a source of wealth",
+      clue: "Book on a New Zealand adventure - initially a source of wealth",
       clueWithDefinitionUnderlined:
-        "Book on a New Zealand adventure - intially <u>a source of wealth</u>",
+        "Book on a New Zealand adventure - initially <u>a source of wealth</u>",
       explanation:
         "B (book) + ON A + NZ (New Zealand) + first letter (initially) of Adventure",
     },
