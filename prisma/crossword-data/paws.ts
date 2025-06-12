@@ -32,9 +32,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "across",
       position: { x: 0, y: 2 },
       solution: "uterine",
-      clue: "",
-      clueWithDefinitionUnderlined: "",
-      explanation: "",
+      clue: "Part of computer in emission of a womb",
+      clueWithDefinitionUnderlined:
+        "Part of computer in emission <u>of a womb</u>",
+      explanation: "Hidden in (part of) compUTER IN Emission",
     },
     {
       number: 15,
@@ -118,9 +119,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "across",
       position: { x: 0, y: 8 },
       solution: "or something like that",
-      clue: "",
-      clueWithDefinitionUnderlined: "",
-      explanation: "",
+      clue: "Wandering, makes right into hotel or whatever",
+      clueWithDefinitionUnderlined:
+        "Wandering, makes right into hotel <u>or whatever</u>",
+      explanation: "Anagram (wandering) of MAKES RIGHT INTO HOTEL",
     },
     {
       number: 32,
@@ -367,9 +369,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 18, y: 0 },
       solution: "lie in wait",
-      clue: "Heard bulk of big cat? Prepare ambush",
+      clue: "Heard bulk of big cat? Prepare to attack",
       clueWithDefinitionUnderlined:
-        "Heard bulk of big cat? <u>Prepare ambush</u>",
+        "Heard bulk of big cat? <u>Prepare to attack</u>",
       explanation:
         "Approximate homophone (heard?) of LION WEIGHT (bulk of big cat)",
     },
@@ -387,9 +389,11 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 0, y: 1 },
       solution: "duffel coat",
-      clue: "38's clothing, low quality, by the Spanish company - a shirt",
-      clueWithDefinitionUnderlined: "",
-      explanation: "",
+      clue: "Locate bananas under second-rate item worn by 38",
+      clueWithDefinitionUnderlined:
+        "Locate bananas under second-rate <u>item worn by 38</u>",
+      explanation:
+        "Anagram (bananas) of LOCATE after (under) DUFF (second-rate)",
     },
     {
       number: 13,
@@ -458,9 +462,11 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 8, y: 6 },
       solution: "Orinoco",
-      clue: "S. American river's alternative, one with no company",
-      clueWithDefinitionUnderlined: "",
-      explanation: "",
+      clue: "Soldiers in touch regularly, with love for American river",
+      clueWithDefinitionUnderlined:
+        "Soldiers in touch regularly, with love for <u>American river</u>",
+      explanation:
+        "OR (soldiers) + IN + alternative letters from (regularly) tOuCh + O (love)",
     },
     {
       number: 27,
