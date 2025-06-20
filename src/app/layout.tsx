@@ -7,8 +7,10 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
 import Header from "./layout/header";
 
+export const defaultPageTitle = "Set by Tangerine";
+
 export const metadata: Metadata = {
-  title: "Set by Tangerine",
+  title: defaultPageTitle,
   description: "Crosswords and other puzzles by Tangerine",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
