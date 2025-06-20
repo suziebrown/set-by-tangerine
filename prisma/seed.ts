@@ -125,7 +125,7 @@ async function seedData(): Promise<void> {
       downloadUrl: "paws.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
-        connect: [{ label: "crossword" }, { label: "cryptic" }],
+        connect: [{ label: "crossword" }, { label: "cryptic" }, { label: "jumbo" }],
       },
       crossword: {
         create: {
