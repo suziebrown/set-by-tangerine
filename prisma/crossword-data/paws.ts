@@ -138,9 +138,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "across",
       position: { x: 0, y: 10 },
       solution: "Thirty-Two Windsor Gardens",
-      clue: "Home of 2 where 30 tends to begin mending windows, or makes the beds",
+      clue: "30 tends to begin mending windows, or makes the beds, in home of 2",
       clueWithDefinitionUnderlined:
-        "<u>Home of 2</u> where 30 tends to begin mending windows, or makes the beds",
+        "30 tends to begin mending windows, or makes the beds, in <u>home of 2</u>",
       explanation:
         "THIRTY (30) + first letter (to begin) of Tends + anagram (mending) of WINDOWS + OR + GARDENS (makes the beds)",
     },
@@ -200,17 +200,17 @@ export const paws: MyCrosswordBasicData = {
       solution: "boysenberry",
       clue: "Lads in Bury picked up in hybrid",
       clueWithDefinitionUnderlined: "Lads in Bury picked up in <u>hybrid</u>",
-      explanation: "Sounds like (picked up) BOYS IN BURY",
+      explanation: "BOYS (lads) + homophone (picked up) of IN BURY",
     },
     {
       number: 54,
       direction: "across",
       position: { x: 0, y: 18 },
       solution: "gorge",
-      clue: "Bit of a darling, or gentleman perhaps, I'm holding a flower",
+      clue: "Judge exchanges gold for gold-producing valley",
       clueWithDefinitionUnderlined:
-        "Bit of a darling, or gentleman <u>perhaps, I'm holding a flower</u>",
-      explanation: "Hidden in (bit of) darlinG OR GEntleman",
+        "Judge exchanges gold for gold-producing <u>valley</u>",
+      explanation: "GAUGE (judge) swapping AU (gold) for OR (gold)",
     },
     {
       number: 55,
@@ -226,9 +226,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "across",
       position: { x: 11, y: 18 },
       solution: "East China Sea",
-      clue: "Eats out with crockery and chair, briefly, and some water",
+      clue: "Eats out with crockery and chair, briefly getting some water",
       clueWithDefinitionUnderlined:
-        "Eats out with crockery and chair, briefly, and <u>some water</u>",
+        "Eats out with crockery and chair, briefly getting <u>some water</u>",
       explanation:
         "Anagram (out) of EATS + CHINA (crockery) + SEAT (chair) dropping last letter (briefly)",
     },
@@ -309,11 +309,11 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 6, y: 0 },
       solution: "geese",
-      clue: "After first pairs escaped, cage these birds",
+      clue: "First pair of each having escaped, cage these birds",
       clueWithDefinitionUnderlined:
-        "After first pairs escaped, cage these <u>birds</u>",
+        "First pair of each having escaped, cage these <u>birds</u>",
       explanation:
-        "caGE thESE minus the first two letters of each (first pairs escaped)",
+        "caGE thESE minus the first two letters of each (first pair of each having escaped)",
     },
     {
       number: 5,
@@ -330,9 +330,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 10, y: 0 },
       solution: "nylon",
-      clue: "Vinyl one's lost jacket for - material from the 30s",
+      clue: "Lost jacket for vinyl, one's material from the 30s",
       clueWithDefinitionUnderlined:
-        "Vinyl one's lost jacket for - <u>material from the 30s</u>",
+        "Lost jacket for vinyl, one's <u>material from the 30s</u>",
       explanation: "viNYL ONe's without outside letters (lost jacket)",
     },
     {
@@ -359,10 +359,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 16, y: 0 },
       solution: "nib",
-      clue: "Throw away revolutionary writer's point",
+      clue: "Chuck out revolutionary writer's point",
       clueWithDefinitionUnderlined:
-        "Throw away revolutionary <u>writer's point</u>",
-      explanation: "Reversal (revolutionary) of BIN (throw away)",
+        "Chuck out revolutionary <u>writer's point</u>",
+      explanation: "Reversal (revolutionary) of BIN (chuck out)",
     },
     {
       number: 10,
@@ -420,9 +420,8 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 9, y: 4 },
       solution: "I do",
-      clue: "Documents love in words heard at wedding",
-      clueWithDefinitionUnderlined:
-        "Documents love in <u>words heard at wedding</u>",
+      clue: "Documents love in wedding vows",
+      clueWithDefinitionUnderlined: "Documents love in <u>wedding vows</u>",
       explanation: "ID (documents) + O (love)",
     },
     {
@@ -463,11 +462,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 8, y: 6 },
       solution: "Orinoco",
-      clue: "Soldiers in touch regularly, with love for American river",
+      clue: "Soldiers in love, finding company in S. American river",
       clueWithDefinitionUnderlined:
-        "Soldiers in touch regularly, with love for <u>American river</u>",
-      explanation:
-        "OR (soldiers) + IN + alternative letters from (regularly) tOuCh + O (love)",
+        "Soldiers in love, finding company in <u>S. American river</u>",
+      explanation: "OR (soldiers) + IN + O (love) + CO (company)",
     },
     {
       number: 27,
@@ -502,9 +500,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 2, y: 10 },
       solution: "inert",
-      clue: "Not reacting to topless fine art",
-      clueWithDefinitionUnderlined: "<u>Not reacting</u> to topless fine art",
-      explanation: "First letters removed in (topless) fINE aRT",
+      clue: "In fine art, being topless won't get a reaction",
+      clueWithDefinitionUnderlined:
+        "In fine art, being topless <u>won't get a reaction</u>",
+      explanation: "fINE aRT with first letters removed (topless)",
     },
     {
       number: 35,
@@ -540,11 +539,11 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 0, y: 12 },
       solution: "Paddington",
-      clue: "Character takes dessert to Northern area for you",
+      clue: "Character brings dessert to Northern area for a turn",
       clueWithDefinitionUnderlined:
-        "<u>Character</u> takes dessert to Northern area for you",
+        "<u>Character</u> brings dessert to Northern area for a turn",
       explanation:
-        "PUDDING (dessert) + TO + N (Northern) with A (area) replacing (for) U (you)",
+        "PUDDING (dessert) + TO + N (Northern) with A (area) replacing (for) U (a turn)",
     },
     {
       number: 39,
@@ -561,9 +560,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 16, y: 12 },
       solution: "hedge",
-      clue: "Hard limit to balancing investment",
-      clueWithDefinitionUnderlined: "Hard limit to <u>balancing investment</u>",
-      explanation: "H (hard) + EDGE (limit)",
+      clue: "The insider's advantage: reduce risk with this investment",
+      clueWithDefinitionUnderlined:
+        "The insider's advantage: <u>reduce risk with this investment</u>",
+      explanation: "Middle letter (insider) of tHe + EDGE (advantage)",
     },
     {
       number: 41,
@@ -580,11 +580,10 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 4, y: 14 },
       solution: "millennia",
-      clue: "For a long time, stripped the last pound from member of an avocado-loving generation",
+      clue: "Frustrated men in Lila for a long time",
       clueWithDefinitionUnderlined:
-        "For <u>a long time</u>, stripped the last pound from member of an avocado-loving generation",
-      explanation:
-        "MILLENNIAL (member of an avocado-loving generation) minus (stripped) the last L (pound)",
+        "Frustrated men in Lila for <u>a long time</u>",
+      explanation: "Anagram (frustrated) of MEN IN LILA",
     },
     {
       number: 44,
@@ -641,10 +640,9 @@ export const paws: MyCrosswordBasicData = {
       direction: "down",
       position: { x: 15, y: 16 },
       solution: "sac",
-      clue: "Returned short case for another bag",
-      clueWithDefinitionUnderlined:
-        "Returned short case for <u>another bag</u>",
-      explanation: "Reversal (returned) of CASE without last letter (short)",
+      clue: "Bag small account",
+      clueWithDefinitionUnderlined: "<u>Bag</u> small account",
+      explanation: "S (small) + AC (account)",
     },
     {
       number: 53,
