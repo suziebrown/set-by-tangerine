@@ -6,6 +6,12 @@ test.beforeEach(async ({ page }) => {
   await browsePage.goto();
 });
 
+test("Sets page title", async ({ page }) => {
+  const browsePage = new BrowsePage(page);
+
+  await browsePage.expectPageTitle("Set by Tangerine");
+});
+
 test("displays page heading", async ({ page }) => {
   const browsePage = new BrowsePage(page);
 

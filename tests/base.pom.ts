@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 export class BasePage {
   readonly page: Page;
@@ -12,5 +12,9 @@ export class BasePage {
       name: heading,
     });
     await expect(headingLocator).toBeVisible();
+  }
+
+  async expectPageTitle(title: string) {
+    expect(await this.page.title()).toBe(title);
   }
 }
