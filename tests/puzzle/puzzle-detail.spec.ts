@@ -6,10 +6,10 @@ test.beforeEach(async ({ page }) => {
   await detailPage.goto();
 });
 
-test("Sets page title", async ({ page }) => {
+test("Adds puzzle title to page title", async ({ page }) => {
   const detailPage = new PuzzleDetailPage(page);
 
-  await detailPage.expectPageTitle("Set by Tangerine");
+  await detailPage.expectPageTitle("Insiders | Set by Tangerine");
 });
 
 test("displays puzzle title", async ({ page }) => {
