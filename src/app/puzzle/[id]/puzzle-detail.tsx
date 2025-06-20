@@ -1,7 +1,7 @@
 "use client";
 
 import DownloadButton from "@components/download-button";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type PuzzleWithCrossword } from "prisma/types";
 import { useState } from "react";
@@ -27,10 +27,10 @@ export default function PuzzleDetail({
 
           <button
             onClick={() => setShowInfo((show) => !show)}
-            className="h-8 w-8 text-orange-500 hover:text-orange-600"
+            className="ml-2 h-5 w-5 rounded-full border border-orange-700 bg-orange-500 hover:bg-orange-600"
             aria-label={showInfo ? "Hide info" : "Show info"}
           >
-            <FontAwesomeIcon className="h-4 w-4" icon={faInfoCircle} />
+            <FontAwesomeIcon className="mb-1 h-3 w-3" icon={faInfo} />
           </button>
         </span>
 

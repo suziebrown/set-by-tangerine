@@ -24,7 +24,7 @@ export default function RootLayout({
         <Header />
         <TRPCReactProvider>
           <HydrateClient>
-            <main className="flex min-h-screen flex-col bg-gradient-to-b from-orange-300 to-orange-400 text-black">
+            <main className="flex min-h-screen flex-col text-black">
               <div className="container mx-auto flex flex-col justify-start gap-6 p-4">
                 {children}
               </div>
