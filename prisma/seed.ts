@@ -3,6 +3,7 @@ import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
 import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
 import { sailAway } from "./crossword-data/sail-away";
+import { paws } from "./crossword-data/paws";
 
 const prisma = new PrismaClient();
 
@@ -17,8 +18,18 @@ async function clearDatabase(): Promise<void> {
 async function seedData(): Promise<void> {
   console.log("Seeding static data into database...");
 
-  await prisma.tag.create({ data: { label: "crossword" } });
-  await prisma.tag.create({ data: { label: "cryptic" } });
+  console.log("Seeding tags...");
+
+  await prisma.tag.createMany({
+    data: [
+      { label: "crossword" },
+      { label: "cryptic" },
+      { label: "quick" },
+      { label: "jumbo" },
+    ],
+  });
+
+  console.log("Seeding puzzles...");
 
   await prisma.puzzle.create({
     data: {
@@ -90,7 +101,7 @@ async function seedData(): Promise<void> {
       publishedAt: new Date(2025, 4, 15, 17, 0, 0),
       firstPublishedAt: new Date(2025, 4, 15, 17, 0, 0),
       downloadUrl: "sail-away.pdf",
-      imageUrl: "insiders_grid.png",
+      imageUrl: "insiders_grid.jpg",
       tags: {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
       },
@@ -99,6 +110,31 @@ async function seedData(): Promise<void> {
           instructions:
             "The wordplay in twenty-five clues indicates a superfluous letter. These letters, in clue order, give a thematic work. The remaining entries (not otherwise defined) are involved in the thematic journey.",
           data: JSON.stringify(sailAway),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      title: "Paws",
+      setBy: "Tangerine",
+      publishedAt: new Date(2025, 5, 20, 19, 0, 0),
+      firstPublishedAt: new Date(2025, 5, 20, 19, 0, 0),
+      downloadUrl: "paws.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "cryptic" },
+          { label: "jumbo" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(paws),
         },
       },
     },
