@@ -20,8 +20,8 @@ export class PuzzleDetailPage extends BasePage {
     await expect(this.page.getByText(`Published on `)).not.toBeVisible();
   }
 
-  async hideMetadata() {
-    const infoButton = this.page.getByRole("button", { name: "Hide info" });
+  async showMetadata() {
+    const infoButton = this.page.getByRole("button", { name: "Show info" });
     await infoButton.click();
   }
 }
