@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { test } from "@playwright/test";
 import { PuzzleDetailPage } from "./puzzle-detail.pom";
 
 test.beforeEach(async ({ page }) => {
@@ -15,13 +15,13 @@ test("displays puzzle title", async ({ page }) => {
 test("displays metadata", async ({ page }) => {
   const detailPage = new PuzzleDetailPage(page);
 
-  await detailPage.expectMetadata();
+  await detailPage.expectMetadataHidden();
 });
 
-test.skip("clicking info icon hides metadata", async ({ page }) => {
+test.skip("clicking info icon shows metadata", async ({ page }) => {
   const detailPage = new PuzzleDetailPage(page);
 
-  await detailPage.hideMetadata();
+  await detailPage.showMetadata();
 
-  await detailPage.expectMetadataHidden();
+  await detailPage.expectMetadata();
 });
