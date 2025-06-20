@@ -7,7 +7,7 @@ export default function InfoBox({
   puzzleDetails: PuzzleWithCrossword;
 }) {
   return (
-    <div className="flex flex-col gap-2 rounded-lg border-2 border-orange-500/30 bg-white/20 p-4">
+    <div className="flex flex-col gap-2 rounded-lg border-2 border-orange-300 bg-orange-200 p-4">
       <i className="text-sm">
         Published on{" "}
         {puzzleDetails.firstPublishedAt
