@@ -120,9 +120,9 @@ async function seedData(): Promise<void> {
     data: {
       title: "Paws",
       setBy: "Tangerine",
-      publishedAt: new Date(2025, 4, 26, 8, 0, 0),
-      firstPublishedAt: new Date(2025, 4, 26, 8, 0, 0),
-      downloadUrl: null,
+      publishedAt: new Date(2025, 5, 20, 19, 0, 0),
+      firstPublishedAt: new Date(2025, 5, 20, 19, 0, 0),
+      downloadUrl: "paws.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
