@@ -15,7 +15,7 @@ export default function PuzzleDetail({
 }: {
   puzzleDetails: PuzzleWithCrossword;
 }) {
-  const [hideInfo, setHideInfo] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   const crosswordData = parseCrosswordDataJson(puzzleDetails?.crossword?.data);
 
@@ -26,9 +26,9 @@ export default function PuzzleDetail({
           <Title>{puzzleDetails.title}</Title>
 
           <button
-            onClick={() => setHideInfo((show) => !show)}
+            onClick={() => setShowInfo((show) => !show)}
             className="h-8 w-8 text-orange-500 hover:text-orange-600"
-            aria-label={hideInfo ? "Show info" : "Hide info"}
+            aria-label={showInfo ? "Hide info" : "Show info"}
           >
             <FontAwesomeIcon className="h-4 w-4" icon={faInfoCircle} />
           </button>
@@ -39,7 +39,7 @@ export default function PuzzleDetail({
         )}
       </div>
 
-      {!hideInfo && <InfoBox puzzleDetails={puzzleDetails} />}
+      {showInfo && <InfoBox puzzleDetails={puzzleDetails} />}
 
       {puzzleDetails?.crossword && crosswordData && (
         <Crossword
