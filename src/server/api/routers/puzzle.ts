@@ -14,11 +14,9 @@ export const puzzleRouter = createTRPCRouter({
   getById: publicProcedure
     .input(z.object({ id: z.number() }))
     .query(async ({ ctx, input }) => {
-      const puzzle = await ctx.db.puzzle.findUniqueOrThrow({
+      return ctx.db.puzzle.findUniqueOrThrow({
         where: { id: input.id },
         include: { tags: true, crossword: true },
       });
-
-      return puzzle ?? null;
     }),
 });

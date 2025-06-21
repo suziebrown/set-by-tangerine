@@ -10,15 +10,9 @@ import {
   type MyCrosswordData,
 } from "../app/puzzle/[id]/crossword/crossword.type";
 
-// TODO Add tests for the top-level function too
 export const parseCrosswordDataJson = (
-  json?: JsonValue,
-): MyCrosswordData | null => {
-  if (json == null) return null;
-
-  const crosswordData = JSON.parse(json as string) as MyCrosswordBasicData;
-  return mapMyCrosswordData(crosswordData);
-};
+  json: JsonValue,
+): MyCrosswordData => JSON.parse(json as string) as MyCrosswordData;
 
 export const mapMyCrosswordData = (
   basicData: MyCrosswordBasicData,

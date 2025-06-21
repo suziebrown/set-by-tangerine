@@ -4,6 +4,7 @@ import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
 import { sailAway } from "./crossword-data/sail-away";
 import { paws } from "./crossword-data/paws";
+import { mapMyCrosswordData } from "~/helpers/crossword-helpers";
 
 const prisma = new PrismaClient();
 
@@ -31,6 +32,10 @@ async function seedData(): Promise<void> {
 
   console.log("Seeding puzzles...");
 
+  // QQ Do this for the other crosswords too - extract a helper?
+  console.log("Normalising crossword data for puzzle 'Insiders'...");
+  const insidersData = JSON.stringify(mapMyCrosswordData(insiders));
+
   await prisma.puzzle.create({
     data: {
       title: "Insiders",
@@ -48,7 +53,7 @@ async function seedData(): Promise<void> {
         create: {
           instructions:
             "The wordplay in 22 clues leads to an extra letter. In clue order, these spell a thematic slogan.",
-          data: JSON.stringify(insiders),
+          data: insidersData,
         },
       },
     },
