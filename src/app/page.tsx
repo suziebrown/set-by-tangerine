@@ -3,6 +3,7 @@ import { api } from "~/trpc/server";
 import Title from "@components/title";
 
 export default async function Browse() {
+  // QQ Change to use client-side TRPC hook, and handle loading/error states
   const puzzles = await api.puzzle.list();
 
   return (

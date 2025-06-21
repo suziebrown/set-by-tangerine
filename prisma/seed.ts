@@ -4,6 +4,8 @@ import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
 import { sailAway } from "./crossword-data/sail-away";
 import { paws } from "./crossword-data/paws";
+import { mapMyCrosswordData } from "~/helpers/crossword-helpers";
+import { type MyCrosswordBasicData } from "~/app/puzzle/[id]/crossword/crossword.type";
 
 const prisma = new PrismaClient();
 
@@ -31,6 +33,7 @@ async function seedData(): Promise<void> {
 
   console.log("Seeding puzzles...");
 
+  const insidersData = getNormalisedCrosswordJson("Insiders", insiders);
   await prisma.puzzle.create({
     data: {
       title: "Insiders",
@@ -48,13 +51,17 @@ async function seedData(): Promise<void> {
         create: {
           instructions:
             "The wordplay in 22 clues leads to an extra letter. In clue order, these spell a thematic slogan.",
-          data: JSON.stringify(insiders),
+          data: insidersData,
         },
       },
     },
     include: { crossword: true },
   });
 
+  const helloMyNameIsData = getNormalisedCrosswordJson(
+    "Hello My Name Is",
+    helloMyNameIs,
+  );
   await prisma.puzzle.create({
     data: {
       title: "Hello My Name Is",
@@ -68,12 +75,16 @@ async function seedData(): Promise<void> {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
       },
       crossword: {
-        create: { instructions: null, data: JSON.stringify(helloMyNameIs) },
+        create: { instructions: null, data: helloMyNameIsData },
       },
     },
     include: { crossword: true },
   });
 
+  const partingGiftData = getNormalisedCrosswordJson(
+    "Parting Gift",
+    partingGift,
+  );
   await prisma.puzzle.create({
     data: {
       title: "Parting Gift",
@@ -88,12 +99,13 @@ async function seedData(): Promise<void> {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
       },
       crossword: {
-        create: { instructions: null, data: JSON.stringify(partingGift) },
+        create: { instructions: null, data: partingGiftData },
       },
     },
     include: { crossword: true },
   });
 
+  const sailAwayData = getNormalisedCrosswordJson("Sail Away", sailAway);
   await prisma.puzzle.create({
     data: {
       title: "Sail Away",
@@ -109,13 +121,14 @@ async function seedData(): Promise<void> {
         create: {
           instructions:
             "The wordplay in twenty-five clues indicates a superfluous letter. These letters, in clue order, give a thematic work. The remaining entries (not otherwise defined) are involved in the thematic journey.",
-          data: JSON.stringify(sailAway),
+          data: sailAwayData,
         },
       },
     },
     include: { crossword: true },
   });
 
+  const pawsData = getNormalisedCrosswordJson("Paws", paws);
   await prisma.puzzle.create({
     data: {
       title: "Paws",
@@ -134,13 +147,21 @@ async function seedData(): Promise<void> {
       crossword: {
         create: {
           instructions: null,
-          data: JSON.stringify(paws),
+          data: pawsData,
         },
       },
     },
     include: { crossword: true },
   });
 }
+
+const getNormalisedCrosswordJson = (
+  puzzleTitle: string,
+  basicCrosswordData: MyCrosswordBasicData,
+): string => {
+  console.log(`Normalising crossword data for puzzle '${puzzleTitle}'...`);
+  return JSON.stringify(mapMyCrosswordData(basicCrosswordData));
+};
 
 clearDatabase()
   .then(seedData)
