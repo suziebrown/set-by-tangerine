@@ -63,7 +63,7 @@ async function seedData(): Promise<void> {
       publishedAt: new Date(2025, 1, 16, 14, 0, 0),
       firstPublishedAt: new Date(2025, 1, 16, 14, 0, 0),
       downloadUrl: "hello-my-name-is.pdf",
-      imageUrl: "hello-my-name-is_grid.png",
+      imageUrl: "insiders_grid.jpg",
       tags: {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
       },
@@ -83,7 +83,7 @@ async function seedData(): Promise<void> {
       publishedAt: new Date(2025, 3, 21, 14, 0, 0),
       firstPublishedAt: new Date(2025, 3, 14, 10, 0, 0),
       downloadUrl: "parting-gift.pdf",
-      imageUrl: "hello-my-name-is_grid.png",
+      imageUrl: "insiders_grid.jpg",
       tags: {
         connect: [{ label: "crossword" }, { label: "cryptic" }],
       },

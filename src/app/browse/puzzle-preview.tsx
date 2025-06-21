@@ -6,7 +6,7 @@ export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
   return (
     <a
       href={`/puzzle/${props.puzzle.id}`}
-      className="max-w-[400px] flex-grow rounded-lg border border-white/30 bg-white/20 p-2 hover:bg-white/30"
+      className="max-w-[400px] flex-grow rounded-lg border border-orange-300 bg-orange-200 p-2 hover:bg-orange-300"
     >
       <h3 className="text-lg font-semibold">{props.puzzle.title}</h3>
 
