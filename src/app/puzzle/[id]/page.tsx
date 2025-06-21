@@ -26,9 +26,9 @@ import { useParams } from "next/navigation";
 // }
 
 export default function PuzzleDetail() {
-  const params = useParams<{id: string}>();
+  const params = useParams<{ id: string }>();
   const puzzleQuery = api.puzzle.getById.useQuery({ id: parseInt(params.id) });
-  
+
   const [showInfo, setShowInfo] = useState(false);
 
   // QQ Handle loading / error state

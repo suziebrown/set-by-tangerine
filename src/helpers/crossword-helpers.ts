@@ -10,9 +10,8 @@ import {
   type MyCrosswordData,
 } from "../app/puzzle/[id]/crossword/crossword.type";
 
-export const parseCrosswordDataJson = (
-  json: JsonValue,
-): MyCrosswordData => JSON.parse(json as string) as MyCrosswordData;
+export const parseCrosswordDataJson = (json: JsonValue): MyCrosswordData =>
+  JSON.parse(json as string) as MyCrosswordData;
 
 export const mapMyCrosswordData = (
   basicData: MyCrosswordBasicData,
