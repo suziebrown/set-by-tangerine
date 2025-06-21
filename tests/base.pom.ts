@@ -15,6 +15,8 @@ export class BasePage {
   }
 
   async expectPageTitle(title: string) {
+    await this.page.waitForLoadState();
+
     expect(await this.page.title()).toBe(title);
   }
 }

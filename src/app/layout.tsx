@@ -12,7 +12,12 @@ export const defaultPageTitle = "Set by Tangerine";
 export const metadata: Metadata = {
   title: defaultPageTitle,
   description: "Crosswords and other puzzles by Tangerine",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/favicon.ico" },
+    { rel: "icon", sizes: "16x16", url: "/favicon-16x16.png" },
+    { rel: "icon", sizes: "32x32", url: "/favicon-32x32.png" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+  ],
 };
 
 export default function RootLayout({
