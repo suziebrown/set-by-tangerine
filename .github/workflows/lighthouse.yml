@@ -1,0 +1,41 @@
+name: Lighthouse Audit
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  lighthouse:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get preview deployment URL
+        id: vercel_preview_url
+        uses: zentered/vercel-preview-url@v1.4.0
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          vercel_app: "set-by-tangerine"
+
+      - name: Await preview deployment ready
+        uses: UnlyEd/github-action-await-vercel@v2.0.0
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: ${{ format('https://{0}', steps.vercel_preview_url.outputs.preview_url) }}
+          timeout: 420
+          poll-interval: 15
+
+      - name: Audit preview URL with Lighthouse
+        uses: foo-software/lighthouse-check-action@master
+        id: lighthouse_audit
+        with:
+          urls: "${{ format('https://{0}', steps.vercel_preview_url.outputs.preview_url) }}"
+          extraHeaders: '{ "x-vercel-protection-bypass": "${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}"}'
+          prCommentEnabled: true
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
