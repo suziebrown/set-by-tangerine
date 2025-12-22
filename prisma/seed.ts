@@ -5,6 +5,7 @@ import { partingGift } from "./crossword-data/parting-gift";
 import { sailAway } from "./crossword-data/sail-away";
 import { paws } from "./crossword-data/paws";
 import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
+import { canIt } from "./crossword-data/can-it";
 
 const prisma = new PrismaClient();
 
@@ -137,6 +138,27 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(paws),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      title: "Can It!",
+      setBy: "Tangerine",
+      publishedAt: new Date(2025, 11, 22, 15, 0, 0),
+      firstPublishedAt: new Date(2025, 9, 19, 12, 0, 0),
+      downloadUrl: "can-it.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [{ label: "crossword" }, { label: "cryptic" }],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(canIt),
         },
       },
     },
