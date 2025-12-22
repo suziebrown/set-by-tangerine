@@ -4,6 +4,7 @@ import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
 import { sailAway } from "./crossword-data/sail-away";
 import { paws } from "./crossword-data/paws";
+import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
 
 const prisma = new PrismaClient();
 
@@ -26,6 +27,7 @@ async function seedData(): Promise<void> {
       { label: "cryptic" },
       { label: "quick" },
       { label: "jumbo" },
+      { label: "mini" },
     ],
   });
 
@@ -135,6 +137,33 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(paws),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      title: "Bemi Bugle Issue 1",
+      setBy: "Tangerine",
+      blurb:
+        "This tiny crossword appeared in the inaugural issue of the Bemi Bugle, a Christmas newsletter pretending to be a newspaper.",
+      publishedAt: new Date(2025, 11, 22, 13, 0, 0),
+      firstPublishedAt: new Date(2025, 11, 1, 12, 0, 0),
+      downloadUrl: "bemi-bugle-issue-1.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "cryptic" },
+          { label: "mini" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(bemiBugleIssue1),
         },
       },
     },
