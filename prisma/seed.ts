@@ -8,6 +8,7 @@ import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
 import { canIt } from "./crossword-data/can-it";
 import { birthdayCard2021 } from "./crossword-data/birthday-card-2021";
 import { happyBirthdayIsaac } from "./crossword-data/happy-birthday-isaac";
+import { cellService } from "./crossword-data/cell-service";
 
 const prisma = new PrismaClient();
 
@@ -243,6 +244,29 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(happyBirthdayIsaac),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      title: "Cell Service",
+      setBy: "Tangerine",
+      blurb:
+        "I made this puzzle as a bit of entertainment for an activist friend who was in prison. He didn't get on very well with it, but perhaps you'll enjoy it more.",
+      publishedAt: new Date(2025, 11, 22, 19, 0, 0),
+      firstPublishedAt: new Date(2024, 10, 15, 9, 0, 0),
+      downloadUrl: "cell-service.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [{ label: "crossword" }, { label: "cryptic" }],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(cellService),
         },
       },
     },
