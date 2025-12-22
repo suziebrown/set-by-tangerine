@@ -7,6 +7,7 @@ import { paws } from "./crossword-data/paws";
 import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
 import { canIt } from "./crossword-data/can-it";
 import { birthdayCard2021 } from "./crossword-data/birthday-card-2021";
+import { happyBirthdayIsaac } from "./crossword-data/happy-birthday-isaac";
 
 const prisma = new PrismaClient();
 
@@ -215,6 +216,33 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(birthdayCard2021),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      title: "Happy Birthday Isaac",
+      setBy: "Tangerine & Cerenovus",
+      blurb:
+        "A collaboration with a friend to create a birthday puzzle for another friend. Customised to fit with Isaac's preference for short answers, Spoonerisms and bad puns.",
+      publishedAt: new Date(2025, 11, 22, 18, 0, 0),
+      firstPublishedAt: new Date(2023, 9, 11, 10, 0, 0),
+      downloadUrl: "happy-birthday-isaac.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "cryptic" },
+          { label: "birthday" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(happyBirthdayIsaac),
         },
       },
     },
