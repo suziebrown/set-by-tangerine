@@ -149,8 +149,8 @@ async function seedData(): Promise<void> {
       setBy: "Tangerine",
       blurb:
         "This tiny crossword appeared in the inaugural issue of the Bemi Bugle, a Christmas newsletter pretending to be a newspaper.",
-      publishedAt: new Date(2025, 12, 1, 12, 0, 0),
-      firstPublishedAt: new Date(2025, 12, 11, 12, 0, 0),
+      publishedAt: new Date(2025, 11, 22, 13, 0, 0),
+      firstPublishedAt: new Date(2025, 11, 1, 12, 0, 0),
       downloadUrl: "bemi-bugle-issue-1.pdf",
       imageUrl: "insiders_grid.jpg",
       tags: {
