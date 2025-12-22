@@ -6,6 +6,7 @@ import { sailAway } from "./crossword-data/sail-away";
 import { paws } from "./crossword-data/paws";
 import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
 import { canIt } from "./crossword-data/can-it";
+import { birthdayCard2021 } from "./crossword-data/birthday-card-2021";
 
 const prisma = new PrismaClient();
 
@@ -29,6 +30,7 @@ async function seedData(): Promise<void> {
       { label: "quick" },
       { label: "jumbo" },
       { label: "mini" },
+      { label: "birthday" },
     ],
   });
 
@@ -186,6 +188,33 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(bemiBugleIssue1),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      title: "Birthday Card 2021",
+      setBy: "Tangerine",
+      blurb:
+        "Every year I make my dad a birthday card featuring a puzzle themed around his age. On this occasion it was a cryptic crossword.",
+      publishedAt: new Date(2025, 11, 22, 15, 30, 0),
+      firstPublishedAt: new Date(2021, 5, 14, 8, 0, 0),
+      downloadUrl: "birthday-card-2021.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "cryptic" },
+          { label: "birthday" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(birthdayCard2021),
         },
       },
     },
