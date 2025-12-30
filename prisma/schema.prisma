@@ -18,7 +18,7 @@ model Post {
 }
 
 model Puzzle {
-    id               Int        @id @default(autoincrement())
+    id               String        @id
     title            String
     setBy            String
     blurb            String?
@@ -42,7 +42,7 @@ model Tag {
 
 model Crossword {
     id           Int     @id @default(autoincrement())
-    puzzleId     Int     @unique
+    puzzleId     String     @unique
     puzzle       Puzzle  @relation(fields: [puzzleId], references: [id])
     instructions String?
     data         Json    @default("{}")
