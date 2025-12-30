@@ -12,7 +12,7 @@ export const puzzleRouter = createTRPCRouter({
   }),
 
   getById: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const puzzle = await ctx.db.puzzle.findUniqueOrThrow({
         where: { id: input.id },

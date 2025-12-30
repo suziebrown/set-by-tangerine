@@ -40,6 +40,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "insiders",
       title: "Insiders",
       setBy: "Tangerine",
       blurb:
@@ -64,6 +65,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "hello-my-name-is",
       title: "Hello My Name Is",
       setBy: "Tangerine",
       blurb: "Allow me to introduce myself...",
@@ -83,6 +85,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "parting-gift",
       title: "Parting Gift",
       setBy: "Tangerine",
       blurb:
@@ -103,6 +106,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "sail-away",
       title: "Sail Away",
       setBy: "Tangerine",
       publishedAt: new Date(2025, 4, 15, 17, 0, 0),
@@ -125,6 +129,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "paws",
       title: "Paws",
       setBy: "Tangerine",
       publishedAt: new Date(2025, 5, 20, 19, 0, 0),
@@ -150,6 +155,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "can-it",
       title: "Can It!",
       setBy: "Tangerine",
       publishedAt: new Date(2025, 11, 22, 15, 0, 0),
@@ -171,6 +177,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "bemi-bugle-issue-1",
       title: "Bemi Bugle Issue 1",
       setBy: "Tangerine",
       blurb:
@@ -198,6 +205,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "birthday-card-2021",
       title: "Birthday Card 2021",
       setBy: "Tangerine",
       blurb:
@@ -225,6 +233,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "happy-birthday-isaac",
       title: "Happy Birthday Isaac",
       setBy: "Tangerine & Cerenovus",
       blurb:
@@ -252,6 +261,7 @@ async function seedData(): Promise<void> {
 
   await prisma.puzzle.create({
     data: {
+      id: "cell-service",
       title: "Cell Service",
       setBy: "Tangerine",
       blurb:
