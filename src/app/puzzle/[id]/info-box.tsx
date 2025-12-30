@@ -1,5 +1,5 @@
-import { type PuzzleWithCrossword } from "prisma/types";
 import { Badge } from "@components/badge";
+import { type PuzzleWithCrossword } from "prisma/types";
 
 export default function InfoBox({
   puzzleDetails,
@@ -8,11 +8,21 @@ export default function InfoBox({
 }) {
   return (
     <div className="flex flex-col gap-2 rounded-lg border-2 border-orange-300 bg-orange-200 p-4">
+      <i>Set by {puzzleDetails.setBy}</i>
+
       <i className="text-sm">
-        Published on{" "}
-        {puzzleDetails.firstPublishedAt
-          ? puzzleDetails.firstPublishedAt.toLocaleDateString("en-GB")
-          : puzzleDetails.publishedAt.toLocaleDateString("en-GB")}
+        {puzzleDetails.firstPublishedAt && (
+          <>
+            First published on{" "}
+            {puzzleDetails.firstPublishedAt.toLocaleDateString("en-GB")}
+            <br />
+            Published here on{" "}
+          </>
+        )}
+
+        {!puzzleDetails.firstPublishedAt && <>Published on </>}
+
+        {puzzleDetails.publishedAt.toLocaleDateString("en-GB")}
       </i>
 
       {puzzleDetails.blurb && (

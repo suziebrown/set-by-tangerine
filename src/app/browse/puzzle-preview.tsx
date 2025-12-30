@@ -11,8 +11,10 @@ export function PuzzlePreview(props: { puzzle: PuzzleWithTags }) {
       <h3 className="text-lg font-semibold">{props.puzzle.title}</h3>
 
       <span className="text-sm">
-        First published on{" "}
-        {props.puzzle.firstPublishedAt?.toLocaleDateString("en-GB")}
+        Published on{" "}
+        {props.puzzle.firstPublishedAt
+          ? props.puzzle.firstPublishedAt.toLocaleDateString("en-GB")
+          : props.puzzle.publishedAt.toLocaleDateString("en-GB")}
       </span>
 
       <ul className="mt-2 flex flex-wrap gap-1">
