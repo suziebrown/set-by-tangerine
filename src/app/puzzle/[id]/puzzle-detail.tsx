@@ -3,21 +3,26 @@
 import DownloadButton from "@components/download-button";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type PuzzleWithCrossword } from "prisma/types";
 import { useState } from "react";
 import Crossword from "~/app/puzzle/[id]/crossword/crossword";
 import Title from "../../_components/title";
 import InfoBox from "./info-box";
 import { parseCrosswordDataJson } from "~/helpers/crossword-helpers";
+import { api } from "~/trpc/react";
 
-export default function PuzzleDetail({
-  puzzleDetails,
-}: {
-  puzzleDetails: PuzzleWithCrossword;
-}) {
+export default function PuzzleDetail({ id }: { id: string }) {
   const [showInfo, setShowInfo] = useState(false);
 
-  const crosswordData = parseCrosswordDataJson(puzzleDetails?.crossword?.data);
+  const {
+    data: puzzleDetails,
+    isLoading,
+    isError,
+  } = api.puzzle.getById.useQuery({ id });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Uh-oh!</p>;
+
+  const crosswordData = parseCrosswordDataJson(puzzleDetails.crossword?.data);
 
   return (
     <>
@@ -41,7 +46,7 @@ export default function PuzzleDetail({
 
       {showInfo && <InfoBox puzzleDetails={puzzleDetails} />}
 
-      {puzzleDetails?.crossword && crosswordData && (
+      {puzzleDetails.crossword && crosswordData && (
         <Crossword
           id={puzzleDetails.crossword.id}
           instructions={puzzleDetails.crossword.instructions}

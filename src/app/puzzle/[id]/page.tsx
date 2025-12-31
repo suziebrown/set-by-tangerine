@@ -22,7 +22,6 @@ export default async function ViewPuzzle({
   params: Promise<{ id: string }>;
 }) {
   const id = (await params).id;
-  const puzzleDetails = await api.puzzle.getById({ id });
 
-  return <PuzzleDetail puzzleDetails={puzzleDetails} />;
+  return <PuzzleDetail id={id} />;
 }
