@@ -6,10 +6,42 @@ import Title from "@components/title";
 import { Badge } from "./_components/badge";
 import { type Tag } from "@prisma/client";
 import { Loader } from "./_components/loader";
+import { useEffect, useState } from "react";
+
+type TagSelection = Tag & {
+  isSelected: boolean;
+};
 
 export default function Browse() {
+  const [tagsSelection, setTagsSelection] = useState<Map<number, TagSelection>>(
+    new Map(),
+  );
+
   const puzzlesQuery = api.puzzle.list.useQuery();
   const tagsQuery = api.tag.list.useQuery();
+
+  useEffect(() => {
+    if (!tagsQuery.data) return;
+
+    return setTagsSelection(
+      tagsQuery.data.reduce(
+        (acc, t: Tag) => acc.set(t.id, { ...t, isSelected: false }),
+        new Map(),
+      ),
+    );
+  }, [tagsQuery.data]);
+
+  const toggleTagSelection: (tagId: number) => void = (tagId: number) => {
+    const currentTag = tagsSelection.get(tagId);
+    if (!currentTag) return;
+
+    tagsSelection.set(tagId, {
+      ...currentTag,
+      isSelected: !currentTag.isSelected,
+    });
+
+    setTagsSelection(tagsSelection);
+  };
 
   if (puzzlesQuery.isLoading || tagsQuery.isLoading) return <Loader />;
 
@@ -21,9 +53,9 @@ export default function Browse() {
         <div>
           Filter by tags:
           <ul className="flex flex-wrap gap-1">
-            {tagsQuery.data.map((t: Tag) => (
+            {[...tagsSelection.values()].map((t) => (
               <li key={t.id}>
-                <button type="button">
+                <button type="button" onClick={() => toggleTagSelection(t.id)}>
                   <Badge label={t.label} />
                 </button>
               </li>
