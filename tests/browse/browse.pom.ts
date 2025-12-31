@@ -10,6 +10,9 @@ export class BrowsePage extends BasePage {
 
   async goto() {
     await this.page.goto(this.url);
+    await expect(this.page.getByTestId("loader")).toBeHidden({
+      timeout: 10_000,
+    });
   }
 
   expectPuzzleTitles(titles: string[]) {
