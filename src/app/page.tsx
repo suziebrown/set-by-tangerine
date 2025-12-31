@@ -35,12 +35,14 @@ export default function Browse() {
     const currentTag = tagsSelection.get(tagId);
     if (!currentTag) return;
 
-    tagsSelection.set(tagId, {
+    const newTagsSelection = new Map(tagsSelection);
+
+    newTagsSelection.set(tagId, {
       ...currentTag,
       isSelected: !currentTag.isSelected,
     });
 
-    setTagsSelection(tagsSelection);
+    setTagsSelection(newTagsSelection);
   };
 
   if (puzzlesQuery.isLoading || tagsQuery.isLoading) return <Loader />;
@@ -56,7 +58,7 @@ export default function Browse() {
             {[...tagsSelection.values()].map((t) => (
               <li key={t.id}>
                 <button type="button" onClick={() => toggleTagSelection(t.id)}>
-                  <Badge label={t.label} />
+                  <Badge label={t.label} selected={t.isSelected} />
                 </button>
               </li>
             ))}
