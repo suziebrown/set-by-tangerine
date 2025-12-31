@@ -7,7 +7,7 @@ export function Badge(props: { label: string; selected?: boolean }) {
     <span
       className={clsx(
         "inline-flex rounded-full bg-orange-500 px-2 py-1 align-baseline text-xs text-black",
-        { "opacity-70": props.selected === false },
+        { "opacity-70 hover:opacity-100": props.selected === false },
       )}
     >
       {props.label}

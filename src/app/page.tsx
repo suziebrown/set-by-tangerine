@@ -77,8 +77,8 @@ export default function Browse() {
       <>
         <Title>Browse puzzles</Title>
 
-        <div>
-          Filter by tags:
+        <div className="mb-4">
+          Filter by tags
           <ul className="flex flex-wrap gap-1">
             {[...tagsSelection.values()].map((t) => (
               <li key={t.id}>
