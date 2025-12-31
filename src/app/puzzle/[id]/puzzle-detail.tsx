@@ -9,6 +9,7 @@ import Title from "../../_components/title";
 import InfoBox from "./info-box";
 import { parseCrosswordDataJson } from "~/helpers/crossword-helpers";
 import { api } from "~/trpc/react";
+import { Loader } from "~/app/_components/loader";
 
 export default function PuzzleDetail({ id }: { id: string }) {
   const [showInfo, setShowInfo] = useState(false);
@@ -20,7 +21,7 @@ export default function PuzzleDetail({ id }: { id: string }) {
     isSuccess,
   } = api.puzzle.getById.useQuery({ id });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
 
   if (isError) return <p>Uh-oh!</p>;
 
