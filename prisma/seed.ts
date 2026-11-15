@@ -10,6 +10,7 @@ import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
 import { paws } from "./crossword-data/paws";
 import { sailAway } from "./crossword-data/sail-away";
+import { ghystonChristmasQuick } from "./crossword-data/ghyston-christmas-quick";
 
 const prisma = new PrismaClient();
 
@@ -307,6 +308,34 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(ghystonChristmasCryptic),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      id: "ghyston-christmas-quick",
+      title: "Ghyston Charity Christmas Puzzles - Quick",
+      setBy: "Tangerine",
+      blurb:
+        "Part of a Christmas puzzle page I made for my colleagues to raise money for charity",
+      publishedAt: new Date(2026, 10, 15, 13, 30, 0),
+      firstPublishedAt: new Date(2022, 11, 1, 9, 0, 0),
+      downloadUrl: "ghyston-christmas-puzzles.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "quick" },
+          { label: "Christmas" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(ghystonChristmasQuick),
         },
       },
     },
