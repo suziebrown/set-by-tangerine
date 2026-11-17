@@ -32,7 +32,7 @@ async function seedData(): Promise<void> {
       { label: "Christmas" },
       { label: "crossword" },
       { label: "cryptic" },
-      { label: "quick" },
+      { label: "concise" },
       { label: "jumbo" },
       { label: "mini" },
       { label: "birthday" },

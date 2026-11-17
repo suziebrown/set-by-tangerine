@@ -1,5 +1,6 @@
 import { puzzleRouter } from "~/server/api/routers/puzzle";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { tagRouter } from "./routers/tag";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   puzzle: puzzleRouter,
+  tag: tagRouter,
 });
 
 // export type definition of API
