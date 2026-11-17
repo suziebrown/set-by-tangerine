@@ -1,14 +1,16 @@
 import { PrismaClient } from "@prisma/client";
+import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
+import { birthdayCard2021 } from "./crossword-data/birthday-card-2021";
+import { canIt } from "./crossword-data/can-it";
+import { cellService } from "./crossword-data/cell-service";
+import { ghystonChristmasCryptic } from "./crossword-data/ghyston-christmas-cryptic";
+import { happyBirthdayIsaac } from "./crossword-data/happy-birthday-isaac";
 import { helloMyNameIs } from "./crossword-data/hello-my-name-is";
 import { insiders } from "./crossword-data/insiders";
 import { partingGift } from "./crossword-data/parting-gift";
-import { sailAway } from "./crossword-data/sail-away";
 import { paws } from "./crossword-data/paws";
-import { bemiBugleIssue1 } from "./crossword-data/bemi-bugle-issue-1";
-import { canIt } from "./crossword-data/can-it";
-import { birthdayCard2021 } from "./crossword-data/birthday-card-2021";
-import { happyBirthdayIsaac } from "./crossword-data/happy-birthday-isaac";
-import { cellService } from "./crossword-data/cell-service";
+import { sailAway } from "./crossword-data/sail-away";
+import { ghystonChristmasQuick } from "./crossword-data/ghyston-christmas-quick";
 
 const prisma = new PrismaClient();
 
@@ -27,6 +29,7 @@ async function seedData(): Promise<void> {
 
   await prisma.tag.createMany({
     data: [
+      { label: "Christmas" },
       { label: "crossword" },
       { label: "cryptic" },
       { label: "concise" },
@@ -277,6 +280,62 @@ async function seedData(): Promise<void> {
         create: {
           instructions: null,
           data: JSON.stringify(cellService),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      id: "ghyston-christmas-cryptic",
+      title: "Ghyston Charity Christmas Puzzles - Cryptic",
+      setBy: "Tangerine",
+      blurb:
+        "Part of a Christmas puzzle page I made for my colleagues to raise money for charity",
+      publishedAt: new Date(2026, 10, 15, 11, 0, 0),
+      firstPublishedAt: new Date(2022, 11, 1, 9, 0, 0),
+      downloadUrl: "ghyston-christmas-puzzles.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "cryptic" },
+          { label: "Christmas" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(ghystonChristmasCryptic),
+        },
+      },
+    },
+    include: { crossword: true },
+  });
+
+  await prisma.puzzle.create({
+    data: {
+      id: "ghyston-christmas-quick",
+      title: "Ghyston Charity Christmas Puzzles - Quick",
+      setBy: "Tangerine",
+      blurb:
+        "Part of a Christmas puzzle page I made for my colleagues to raise money for charity",
+      publishedAt: new Date(2026, 10, 15, 13, 30, 0),
+      firstPublishedAt: new Date(2022, 11, 1, 9, 0, 0),
+      downloadUrl: "ghyston-christmas-puzzles.pdf",
+      imageUrl: "insiders_grid.jpg",
+      tags: {
+        connect: [
+          { label: "crossword" },
+          { label: "quick" },
+          { label: "Christmas" },
+        ],
+      },
+      crossword: {
+        create: {
+          instructions: null,
+          data: JSON.stringify(ghystonChristmasQuick),
         },
       },
     },
